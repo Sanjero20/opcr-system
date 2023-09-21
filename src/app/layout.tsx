@@ -1,4 +1,6 @@
 import '@/styles/globals.css';
+import '@/styles/utils.scss';
+
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -13,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="h-screen min-h-screen"> {children}</body>
+      <body className="h-screen min-h-screen">{children}</body>
     </html>
   );
 }
