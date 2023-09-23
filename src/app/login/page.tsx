@@ -1,7 +1,8 @@
 'use client';
 
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -10,7 +11,6 @@ import {
   CardFooter,
   CardHeader,
 } from '@/components/ui/card';
-import { redirect, useRouter } from 'next/navigation';
 import useAuth from '@/stores/auth';
 
 function LoginPage() {
@@ -20,6 +20,12 @@ function LoginPage() {
 
   const { updateAuth } = useAuth();
   const router = useRouter();
+
+  useEffect(() => {
+    if (!error) return;
+    setError('');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [username, password]);
 
   const handleLogin = (e: FormEvent) => {
     e.preventDefault();
@@ -42,7 +48,6 @@ function LoginPage() {
 
   return (
     <div className="background-photo flex h-screen items-center justify-center">
-      {/* Image by <a href="https://www.freepik.com/free-vector/flat-design-abstract-illustration_22900052.htm#query=shapes%20background&position=4&from_view=keyword&track=ais">Freepik</a> */}
       <Card className="w-1/2 sm:w-1/3 xl:w-1/4">
         <CardHeader className="flex flex-col items-center">
           <Image src="/logo.png" width={100} height={100} alt="logo" />
