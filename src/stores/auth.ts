@@ -1,19 +1,18 @@
+import { Account } from '@/types/account';
 import { create } from 'zustand';
 
 interface AuthState {
-  isLoggedIn: boolean;
-  accountRole: 'admin' | 'opcr' | 'ipcr' | undefined;
-  updateAuth: (role: 'admin' | 'opcr' | 'ipcr' | undefined) => void;
+  permission: Account;
+  setPermission: (permission: Account) => void;
+  removeAuth: () => void;
 }
 
 const useAuth = create<AuthState>((set, get) => ({
-  isLoggedIn: false,
-  accountRole: undefined,
-  updateAuth: (role) =>
-    set({
-      isLoggedIn: true,
-      accountRole: role,
-    }),
+  permission: null,
+
+  setPermission: (role) => set({ permission: role }),
+
+  removeAuth: () => set({ permission: null }),
 }));
 
 export default useAuth;
