@@ -6,6 +6,8 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { CardContent, CardFooter } from '@/components/ui/card';
 import { useRouter } from 'next/navigation';
+import useAuth from '@/stores/auth';
+import { setCookie } from '@/services/cookie';
 
 function LoginForm() {
   const [username, setUsername] = useState('');
@@ -14,6 +16,7 @@ function LoginForm() {
 
   // libraries
   const router = useRouter();
+  const auth = useAuth();
 
   useEffect(() => {
     if (error) setError('');
@@ -26,9 +29,13 @@ function LoginForm() {
     switch (username) {
       case 'opcr':
       case 'ipcr':
+      case 'pmt':
+        auth.setPermission(username);
+        setCookie('permission', username);
         router.replace('/');
         break;
       case 'admin':
+        auth.setPermission(username);
         router.replace('/admin');
         break;
       default:
