@@ -1,6 +1,7 @@
 import HeaderLogo from './header-logo';
 import NavLink from './nav-link';
 import BtnLogout from '../button/btn-logout';
+import Links from './links';
 
 function Navbar() {
   return (
@@ -10,8 +11,7 @@ function Navbar() {
 
         <nav>
           <ul>
-            <NavLink href="/">Home</NavLink>
-            <NavLink href="/form">OPCR</NavLink>
+            <Links />
             <NavLink href="/account">Account</NavLink>
             <BtnLogout />
           </ul>
