@@ -19,7 +19,9 @@ function NavLink({ href, children }: NavLinkProps) {
 
   return (
     <Link href={href}>
-      <Button className={`${styles} py-0`}>{children}</Button>
+      <Button className={`${styles} text-md w-32 rounded-xl py-0`}>
+        {children}
+      </Button>
     </Link>
   );
 }

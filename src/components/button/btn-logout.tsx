@@ -5,7 +5,11 @@ import { useRouter } from 'next/navigation';
 import useAuth from '@/stores/auth';
 import { deleteCookie } from '@/services/cookie';
 
-function BtnLogout() {
+type BtnLogoutProps = {
+  className?: string;
+};
+
+function BtnLogout({ className }: BtnLogoutProps) {
   const router = useRouter();
   const { removeAuth } = useAuth();
 
@@ -17,7 +21,7 @@ function BtnLogout() {
 
   return (
     <Button
-      className="bg-transparent hover:bg-transparent"
+      className={`bg-transparent hover:bg-transparent ${className}`}
       onClick={handleLogout}
     >
       Logout

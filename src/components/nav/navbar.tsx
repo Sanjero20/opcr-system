@@ -10,10 +10,10 @@ function Navbar() {
         <HeaderLogo />
 
         <nav>
-          <ul>
+          <ul className="flex gap-2">
             <Links />
             <NavLink href="/account">Account</NavLink>
-            <BtnLogout />
+            <BtnLogout className="text-md" />
           </ul>
         </nav>
       </div>
