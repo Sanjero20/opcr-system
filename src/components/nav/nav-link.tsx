@@ -13,7 +13,7 @@ function NavLink({ href, children }: NavLinkProps) {
   const path = usePathname();
 
   const styles =
-    href === path
+    path === href || path.startsWith(`${href}/`)
       ? 'bg-white text-primary hover:text-white hover:bg-white hover:text-primary'
       : 'bg-transparent hover:bg-transparent';
 
