@@ -8,9 +8,9 @@ type MainLayoutProps = {
 function MainLayout({ children }: MainLayoutProps) {
   return (
     <AuthWrapper>
-      <div>
+      <div className="flex h-full flex-col">
         <Navbar />
-        <main className="px-4 py-2">{children}</main>
+        <main className="flex-1 p-5">{children}</main>
       </div>
     </AuthWrapper>
   );
