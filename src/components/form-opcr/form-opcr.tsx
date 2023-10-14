@@ -1,12 +1,13 @@
 import './contents/table.scss';
 
 import Header from './contents/header';
+import Guidelines from './contents/guidelines';
 
 function FormOpcr() {
   return (
     <main className="">
       <Header />
-      {/* Guidlines Table */}
+      <Guidelines />
       {/* Main Table */}
       {/* Footer */}
     </main>
