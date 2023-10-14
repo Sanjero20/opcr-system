@@ -6,7 +6,13 @@ function MetaData() {
     <thead className={styles.metadata}>
       <tr>
         <td>
-          <Image width={60} height={60} src={'/logo.png'} alt="" />
+          <Image
+            width={60}
+            height={60}
+            src={'/logo.png'}
+            alt=""
+            className="mx-auto"
+          />
         </td>
 
         <td>
