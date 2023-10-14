@@ -1,5 +1,9 @@
 function OPCRAssignPage() {
-  return <div>OPCR Assign page</div>;
+  return (
+    <div>
+      <h1 className="title">IPCR FORM ASSIGNING</h1>
+    </div>
+  );
 }
 
 export default OPCRAssignPage;
