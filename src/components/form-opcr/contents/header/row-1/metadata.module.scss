@@ -1,0 +1,31 @@
+.metadata {
+  tr {
+    & > td:first-child {
+      width: 10%;
+    }
+
+    & > td:nth-child(2) {
+      width: 55%;
+    }
+
+    & > td:nth-child(3) {
+      width: 25%;
+    }
+
+    & > td:last-child {
+      width: 10%;
+    }
+  }
+
+  td {
+    position: relative;
+
+    p {
+      position: absolute;
+      bottom: 2px;
+      left: 5px;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}

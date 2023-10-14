@@ -1,0 +1,22 @@
+.td {
+  border-bottom: 0 !important;
+  padding-bottom: 0.25em !important;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.signature {
+  margin-top: 1rem;
+  width: 250px;
+  align-self: end;
+
+  & > p:first-child {
+    width: 100%;
+    border-top: 1px solid black;
+    text-align: center;
+  }
+}

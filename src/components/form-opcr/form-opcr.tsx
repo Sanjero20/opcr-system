@@ -1,5 +1,16 @@
+import './contents/table.scss';
+
+import Header from './contents/header';
+
 function FormOpcr() {
-  return <main className="flex-1 border border-black"></main>;
+  return (
+    <main className="">
+      <Header />
+      {/* Guidlines Table */}
+      {/* Main Table */}
+      {/* Footer */}
+    </main>
+  );
 }
 
 export default FormOpcr;
