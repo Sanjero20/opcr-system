@@ -6,7 +6,7 @@ function Guidelines() {
     <table className="">
       <tbody>
         <tr>
-          <td className="flex flex-wrap items-center justify-center gap-8 border-t-0 pl-12">
+          <td className="flex flex-wrap items-center justify-center gap-8 border-b-0 border-t-0 pl-12">
             <TableRating />
             <TableOutput />
           </td>
