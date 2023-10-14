@@ -1,11 +1,11 @@
-import MainContainer from '@/components/containers/main-container';
+import CardContainer from '@/components/containers/card-container';
 
 type LayoutProps = {
   children: React.ReactNode;
 };
 
 function Layout({ children }: LayoutProps) {
-  return <MainContainer>{children}</MainContainer>;
+  return <CardContainer>{children}</CardContainer>;
 }
 
 export default Layout;
