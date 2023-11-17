@@ -36,6 +36,7 @@ function LoginForm() {
         break;
       case 'admin':
         auth.setPermission(username);
+        setCookie('permission', username);
         router.replace('/admin');
         break;
       default:

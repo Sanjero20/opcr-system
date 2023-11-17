@@ -4,25 +4,12 @@ import { useMemo } from 'react';
 import NavLink from './nav-link';
 import useAuth from '@/stores/auth';
 
-const OPCR_ROUTES = [
-  { route: '/', name: 'Home ' },
-  { route: '/opcr', name: 'OPCR' },
-];
-
-const IPCR_ROUTES = [
-  { route: '/', name: 'IPCR' },
-  { route: '/table', name: 'Table' },
-];
-
-const PMT_ROUTES = [
-  { route: '/', name: 'Home' },
-  { route: '/offices', name: 'Offices' },
-];
-
-type Routes = {
-  route: string;
-  name: string;
-};
+import {
+  PMT_ROUTES,
+  OPCR_ROUTES,
+  IPCR_ROUTES,
+  ADMIN_ROUTES,
+} from '@/constants/navbar-routes';
 
 function Links() {
   const { permission } = useAuth();
@@ -34,6 +21,8 @@ function Links() {
       return IPCR_ROUTES;
     } else if (permission === 'pmt') {
       return PMT_ROUTES;
+    } else if (permission === 'admin') {
+      return ADMIN_ROUTES;
     }
 
     return [];

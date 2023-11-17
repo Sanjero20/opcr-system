@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button } from '../ui/button';
+import { twMerge } from 'tailwind-merge';
 
 type NavLinkProps = {
   href: string;
@@ -12,16 +13,16 @@ type NavLinkProps = {
 function NavLink({ href, children }: NavLinkProps) {
   const path = usePathname();
 
-  const styles =
-    path === href || path.startsWith(`${href}/`)
+  const styles = twMerge(
+    path === href
       ? 'bg-white text-primary hover:text-white hover:bg-white hover:text-primary'
-      : 'bg-transparent hover:bg-transparent';
+      : 'bg-transparent hover:bg-transparent',
+    'text-md w-32 rounded-xl py-0',
+  );
 
   return (
     <Link href={href}>
-      <Button className={`${styles} text-md w-32 rounded-xl py-0`}>
-        {children}
-      </Button>
+      <Button className={`${styles} `}>{children}</Button>
     </Link>
   );
 }

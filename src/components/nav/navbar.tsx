@@ -1,5 +1,4 @@
 import HeaderLogo from './header-logo';
-import NavLink from './nav-link';
 import BtnLogout from '../button/btn-logout';
 import Links from './links';
 
@@ -12,7 +11,6 @@ function Navbar() {
         <nav>
           <ul className="flex gap-2">
             <Links />
-            <NavLink href="/account">Account</NavLink>
             <BtnLogout className="text-md" />
           </ul>
         </nav>

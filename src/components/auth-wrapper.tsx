@@ -1,10 +1,10 @@
 'use client';
 
 import { useEffect } from 'react';
-import { redirect } from 'next/navigation';
-import { deleteCookie, getCookie, setCookie } from '@/services/cookie';
-import useAuth from '@/stores/auth';
+import { redirect, usePathname } from 'next/navigation';
+import { getCookie } from '@/services/cookie';
 import { Account } from '@/types/account';
+import useAuth from '@/stores/auth';
 
 type AuthWrapperProps = {
   children: React.ReactNode;
@@ -12,9 +12,14 @@ type AuthWrapperProps = {
 
 function AuthWrapper({ children }: AuthWrapperProps) {
   const { permission, setPermission } = useAuth();
+  const currentRoute = usePathname();
 
   useEffect(() => {
     const permission = getCookie('permission') as Account;
+
+    if (permission === 'admin' && currentRoute === '/') {
+      redirect('/admin');
+    }
 
     if (permission) {
       setPermission(permission);
