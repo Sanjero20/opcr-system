@@ -8,6 +8,7 @@ import { CardContent, CardFooter } from '@/components/ui/card';
 import { useRouter } from 'next/navigation';
 import useAuth from '@/stores/auth';
 import { setCookie } from '@/services/cookie';
+import { login } from '@/services/authentication';
 
 function LoginForm() {
   const [username, setUsername] = useState('');
@@ -22,25 +23,25 @@ function LoginForm() {
     if (error) setError('');
   }, [username, password]);
 
-  const handleLogin = (e: FormEvent) => {
+  const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
 
-    // ! Replacing soon with real logic
-    switch (username) {
-      case 'opcr':
-      case 'ipcr':
-      case 'pmt':
-        auth.setPermission(username);
-        setCookie('permission', username);
+    const data = await login(username, password);
+
+    if (!data || data.error) {
+      setError(data.error);
+      return;
+    }
+
+    if (data.loggedIn && data.permission) {
+      setCookie('permission', data.permission);
+      setCookie('token', data.token);
+
+      if (data.permission !== 'admin') {
         router.replace('/');
-        break;
-      case 'admin':
-        auth.setPermission(username);
-        setCookie('permission', username);
+      } else {
         router.replace('/admin');
-        break;
-      default:
-        setError('Incorrect credentials');
+      }
     }
   };
 
