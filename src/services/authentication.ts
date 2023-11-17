@@ -1,12 +1,16 @@
 import axios from 'axios';
 
-const baseURL = 'http://127.0.0.1:5000';
+const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export async function login(username: string, password: string) {
-  const response = await axios.post(baseURL + '/login', {
-    email: username,
-    password,
-  });
+  try {
+    const response = await axios.post(baseURL + '/login', {
+      email: username,
+      password,
+    });
 
-  return await response.data;
+    return await response.data;
+  } catch (error: any) {
+    return error.response.data;
+  }
 }
