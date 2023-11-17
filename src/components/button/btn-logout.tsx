@@ -16,6 +16,7 @@ function BtnLogout({ className }: BtnLogoutProps) {
   const handleLogout = () => {
     removeAuth();
     deleteCookie('permission');
+    deleteCookie('token');
     router.replace('/login');
   };
 
