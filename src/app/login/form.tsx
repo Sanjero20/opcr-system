@@ -5,13 +5,13 @@ import { FormEvent, useEffect, useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { CardContent, CardFooter } from '@/components/ui/card';
+
 import { useRouter } from 'next/navigation';
-import useAuth from '@/stores/auth';
 import { setCookie } from '@/services/cookie';
 import { login } from '@/services/authentication';
 
 function LoginForm() {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>('');
 
@@ -20,12 +20,12 @@ function LoginForm() {
 
   useEffect(() => {
     if (error) setError('');
-  }, [username, password]);
+  }, [email, password]);
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
 
-    const data = await login(username, password);
+    const data = await login(email, password);
 
     if (data.error || !data.permission) {
       setError(data.error);
@@ -53,9 +53,9 @@ function LoginForm() {
         >
           <Input
             type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="Username"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
           />
 
           <Input
