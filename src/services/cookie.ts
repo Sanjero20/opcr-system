@@ -1,4 +1,4 @@
-export function setCookie(cookieName: string, permission: string) {
+export function setCookie(cookieName: string, value: string) {
   // Calculate the expiration time in 1 hour (in milliseconds)
   const expirationTime = new Date().getTime() + 60 * 60 * 1000; // 1 hour
 
@@ -6,7 +6,7 @@ export function setCookie(cookieName: string, permission: string) {
   const expires = new Date(expirationTime);
 
   // Construct the cookie string
-  const cookieString = `${cookieName}=${permission}; expires=${expires.toUTCString()}; path=/`;
+  const cookieString = `${cookieName}=${value}; expires=${expires.toUTCString()}; path=/`;
 
   document.cookie = cookieString;
 }
