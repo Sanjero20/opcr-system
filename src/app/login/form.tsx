@@ -13,11 +13,10 @@ import { login } from '@/services/authentication';
 function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [error, setError] = useState<string | null>('');
 
   // libraries
   const router = useRouter();
-  const auth = useAuth();
 
   useEffect(() => {
     if (error) setError('');
@@ -28,20 +27,19 @@ function LoginForm() {
 
     const data = await login(username, password);
 
-    if (!data || data.error) {
+    if (data.error || !data.permission) {
       setError(data.error);
       return;
     }
 
-    if (data.loggedIn && data.permission) {
-      setCookie('permission', data.permission);
-      setCookie('token', data.token);
+    const { token, permission } = data;
+    setCookie('permission', permission);
+    setCookie('token', token);
 
-      if (data.permission !== 'admin') {
-        router.replace('/');
-      } else {
-        router.replace('/admin');
-      }
+    if (data.permission !== 'admin') {
+      router.replace('/');
+    } else {
+      router.replace('/admin');
     }
   };
 

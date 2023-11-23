@@ -1,8 +1,19 @@
+import { Account } from '@/types/account';
 import axios from 'axios';
 
-const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
+export const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
-export async function login(username: string, password: string) {
+export type LoginResponse = {
+  error: string | null;
+  loggedIn: boolean;
+  permission: Account;
+  token: string;
+};
+
+export async function login(
+  username: string,
+  password: string,
+): Promise<LoginResponse> {
   try {
     const response = await axios.post(baseURL + '/login', {
       email: username,
