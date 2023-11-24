@@ -1,5 +1,5 @@
 export type AccountInfo = {
-  _id: string;
+  _id: { $oid: string };
   name: string;
   email: string;
   username: string;
