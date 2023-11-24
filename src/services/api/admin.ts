@@ -1,12 +1,7 @@
-import api from '@/services/axios';
+import { api, ApiResponse } from '@/services/axios';
 import { AccountInfo } from '@/types/response/admin';
 
 api.defaults.baseURL += '/api/admin';
-
-type ApiResponse<T> = {
-  data: T;
-  error: any;
-};
 
 export async function getAccountsList(): Promise<ApiResponse<AccountInfo[]>> {
   try {

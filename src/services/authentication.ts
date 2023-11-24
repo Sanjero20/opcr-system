@@ -1,4 +1,4 @@
-import api from '@/services/axios';
+import { api } from '@/services/axios';
 import { Account } from '@/types/account';
 
 export type LoginResponse = {
