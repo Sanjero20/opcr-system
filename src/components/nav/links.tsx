@@ -15,9 +15,9 @@ function Links() {
   const { permission } = useAuth();
 
   const routes = useMemo(() => {
-    if (permission === 'opcr') {
+    if (permission === 'head') {
       return OPCR_ROUTES;
-    } else if (permission === 'ipcr') {
+    } else if (permission === 'individual') {
       return IPCR_ROUTES;
     } else if (permission === 'pmt') {
       return PMT_ROUTES;

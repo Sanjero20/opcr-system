@@ -1,1 +1,1 @@
-export type Account = 'admin' | 'opcr' | 'ipcr' | 'pmt' | null;
+export type Account = 'admin' | 'head' | 'individual' | 'pmt' | null;
