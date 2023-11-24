@@ -1,13 +1,13 @@
 import { getAccountsList } from '@/services/api/admin';
-import AccountList from './account-list';
+import { DataTable } from './(table)/data-table';
+import { columns } from './(table)/columns';
 
 async function AccountsPage() {
   const accountList = await getAccountsList();
 
   return (
-    <div>
-      Admin page for handling accounts
-      <AccountList list={accountList.data} />
+    <div className="container">
+      <DataTable columns={columns} data={accountList.data} />
     </div>
   );
 }
