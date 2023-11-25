@@ -24,6 +24,7 @@ import {
 import { Button } from '@/components/ui/button';
 import TableFilter from '@/app/table/filter';
 import TablePagination from '@/app/table/pagination';
+import { Plus } from 'lucide-react';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -50,8 +51,14 @@ export function DataTable<TData, TValue>({
 
   return (
     <>
-      {/* Filter */}
-      <TableFilter table={table} filter="name" placeholder="campus" />
+      <div className="flex h-fit items-center justify-between">
+        <TableFilter table={table} filter="name" placeholder="campus" />
+
+        <Button className="flex gap-2" variant={'add'}>
+          Add Campus
+          <Plus size={20} />
+        </Button>
+      </div>
 
       {/* Table */}
       <div className="rounded-md border text-center">

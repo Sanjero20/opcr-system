@@ -8,7 +8,7 @@ export const columns: ColumnDef<Campus>[] = [
   { accessorKey: 'name', header: 'Campus' },
   {
     accessorKey: 'offices',
-    header: (value) => <div>Office & Departments</div>,
+    header: () => <div>Office & Departments</div>,
     cell: ({ row }) => {
       const offices = row.original.offices;
 

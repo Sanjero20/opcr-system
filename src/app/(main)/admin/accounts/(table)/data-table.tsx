@@ -1,6 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Plus } from 'lucide-react';
 
 import {
   ColumnDef,
@@ -49,8 +51,14 @@ export function DataTable<TData, TValue>({
 
   return (
     <>
-      {/* Filter */}
-      <TableFilter table={table} filter="name" />
+      <div className="flex h-fit items-center justify-between">
+        <TableFilter table={table} filter="name" />
+
+        <Button className="flex gap-2" variant={'add'}>
+          Add Account
+          <Plus size={20} />
+        </Button>
+      </div>
 
       {/* Table */}
       <div className="rounded-md border">
@@ -108,7 +116,6 @@ export function DataTable<TData, TValue>({
         </Table>
       </div>
 
-      {/* Pagination */}
       <TablePagination table={table} />
     </>
   );

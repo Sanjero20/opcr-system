@@ -5,8 +5,6 @@ import { columns } from './(table)/columns';
 async function CampusPage() {
   const campusList = await getCampusList();
 
-  console.log(campusList);
-
   return (
     <div className="container">
       <DataTable columns={columns} data={campusList.data} />
