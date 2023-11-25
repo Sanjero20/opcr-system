@@ -23,8 +23,8 @@ import {
   TableRow,
 } from '@/components/ui/table';
 
-import TableFilter from '@/app/table/filter';
-import TablePagination from '@/app/table/pagination';
+import TableFilter from '@/components/table/filter';
+import TablePagination from '@/components/table/pagination';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];

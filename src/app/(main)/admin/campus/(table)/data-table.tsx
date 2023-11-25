@@ -22,8 +22,8 @@ import {
 } from '@/components/ui/table';
 
 import { Button } from '@/components/ui/button';
-import TableFilter from '@/app/table/filter';
-import TablePagination from '@/app/table/pagination';
+import TableFilter from '@/components/table/filter';
+import TablePagination from '@/components/table/pagination';
 import { Plus } from 'lucide-react';
 
 interface DataTableProps<TData, TValue> {
