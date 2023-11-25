@@ -1,9 +1,9 @@
-import { Account } from '@/types/account';
+import { AccountType } from '@/types/data-types';
 import { create } from 'zustand';
 
 interface AuthState {
-  permission: Account;
-  setPermission: (permission: Account) => void;
+  permission: AccountType;
+  setPermission: (permission: AccountType) => void;
   removeAuth: () => void;
 }
 

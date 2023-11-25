@@ -2,19 +2,21 @@
 
 import { useEffect, useState } from 'react';
 import { redirect } from 'next/navigation';
+
 import Image from 'next/image';
 import LoginForm from './form';
 import { Card, CardHeader } from '@/components/ui/card';
+
 import useAuth from '@/stores/auth';
 import { getCookie } from '@/services/cookie';
-import { Account } from '@/types/account';
+import { AccountType } from '@/types/data-types';
 
 function LoginPage() {
   const [isLoading, setIsLoading] = useState(true);
   const { permission, setPermission } = useAuth();
 
   useEffect(() => {
-    const permission = getCookie('permission') as Account;
+    const permission = getCookie('permission') as AccountType;
 
     if (permission) {
       setPermission(permission);
