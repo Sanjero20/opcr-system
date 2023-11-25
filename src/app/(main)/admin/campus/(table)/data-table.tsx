@@ -54,14 +54,14 @@ export function DataTable<TData, TValue>({
       <TableFilter table={table} filter="name" placeholder="campus" />
 
       {/* Table */}
-      <div className="rounded-md border">
+      <div className="rounded-md border text-center">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead key={header.id} className="text-center">
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -83,7 +83,10 @@ export function DataTable<TData, TValue>({
                   data-state={row.getIsSelected() && 'selected'}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell
+                      key={cell.id}
+                      className="[&:first-child]:w-1/5 [&:last-child]:w-1/6"
+                    >
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext(),

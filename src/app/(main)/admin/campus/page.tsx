@@ -8,7 +8,7 @@ async function CampusPage() {
   console.log(campusList);
 
   return (
-    <div>
+    <div className="container">
       <DataTable columns={columns} data={campusList.data} />
     </div>
   );

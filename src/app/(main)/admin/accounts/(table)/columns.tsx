@@ -37,7 +37,7 @@ export const columns: ColumnDef<Account>[] = [
 
               <DropdownMenuSeparator />
 
-              <DropdownMenuItem>Update Permission</DropdownMenuItem>
+              <DropdownMenuItem>Update Account</DropdownMenuItem>
               <DropdownMenuItem>Delete Account</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
