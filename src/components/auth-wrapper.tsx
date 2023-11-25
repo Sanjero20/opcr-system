@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { redirect, usePathname } from 'next/navigation';
 import { getCookie } from '@/services/cookie';
-import { Account } from '@/types/account';
+import { AccountType } from '@/types/data-types';
 import useAuth from '@/stores/auth';
 
 type AuthWrapperProps = {
@@ -15,7 +15,7 @@ function AuthWrapper({ children }: AuthWrapperProps) {
   const currentRoute = usePathname();
 
   useEffect(() => {
-    const permission = getCookie('permission') as Account;
+    const permission = getCookie('permission') as AccountType;
 
     if (permission === 'admin' && currentRoute === '/') {
       redirect('/admin');

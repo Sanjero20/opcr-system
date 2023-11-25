@@ -1,10 +1,10 @@
 import { api } from '@/services/axios';
-import { Account } from '@/types/account';
+import { AccountType } from '@/types/data-types';
 
 export type LoginResponse = {
   error: string | null;
   loggedIn: boolean;
-  permission: Account;
+  permission: AccountType;
   token: string;
 };
 
