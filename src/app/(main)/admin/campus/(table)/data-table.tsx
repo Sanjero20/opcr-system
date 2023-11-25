@@ -21,6 +21,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 
+import { Button } from '@/components/ui/button';
 import TableFilter from '@/app/table/filter';
 import TablePagination from '@/app/table/pagination';
 
@@ -50,7 +51,7 @@ export function DataTable<TData, TValue>({
   return (
     <>
       {/* Filter */}
-      <TableFilter table={table} filter="name" />
+      <TableFilter table={table} filter="name" placeholder="campus" />
 
       {/* Table */}
       <div className="rounded-md border">

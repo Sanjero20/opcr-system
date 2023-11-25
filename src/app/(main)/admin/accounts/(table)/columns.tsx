@@ -9,11 +9,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { AccountInfo } from '@/types/response/admin';
+import { Account } from '@/types/data-types';
 import { ColumnDef } from '@tanstack/react-table';
 import { MoreHorizontal } from 'lucide-react';
 
-export const columns: ColumnDef<AccountInfo>[] = [
+export const columns: ColumnDef<Account>[] = [
   { accessorKey: 'name', header: 'Name' },
   { accessorKey: 'email', header: 'Email' },
   { accessorKey: 'permission', header: 'Permission' },
