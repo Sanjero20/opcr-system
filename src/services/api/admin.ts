@@ -32,6 +32,6 @@ export async function createCampus(name: string, offices: any[]) {
     });
     return await response.data;
   } catch (error) {
-    return error;
+    throw new Error('Failed to create campus');
   }
 }
