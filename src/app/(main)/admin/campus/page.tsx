@@ -1,28 +1,25 @@
 'use client';
 
-import { getCampusList } from '@/services/api/admin';
 import { DataTable } from './(table)/data-table';
 import { columns } from './(table)/columns';
-import { useEffect, useState } from 'react';
-import { Campus } from '@/types/data-types';
+
+import { useQuery } from '@tanstack/react-query';
+import { getCampusList } from '@/services/api/admin';
 
 function CampusPage() {
-  const [campuses, setCampuses] = useState<Campus[]>([]);
+  const { data, error, isLoading } = useQuery({
+    queryKey: ['campuses'],
+    queryFn: getCampusList,
+    initialData: [],
+  });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data } = await getCampusList();
-      if (data) {
-        setCampuses(data);
-      }
-    };
-
-    fetchData();
-  }, []);
+  if (error) {
+    return <div>Something went wrong...</div>;
+  }
 
   return (
     <div className="container">
-      <DataTable columns={columns} data={campuses} />
+      <DataTable columns={columns} data={data} />
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import AuthWrapper from '@/components/auth-wrapper';
+import QueryWrapper from '@/components/query-wrapper';
 import Navbar from '@/components/nav/navbar';
 
 type MainLayoutProps = {
@@ -7,12 +8,14 @@ type MainLayoutProps = {
 
 function MainLayout({ children }: MainLayoutProps) {
   return (
-    <AuthWrapper>
-      <div className="flex h-full flex-col">
-        <Navbar />
-        <main className="flex-1 p-5">{children}</main>
-      </div>
-    </AuthWrapper>
+    <QueryWrapper>
+      <AuthWrapper>
+        <div className="flex h-full flex-col">
+          <Navbar />
+          <main className="flex-1 p-5">{children}</main>
+        </div>
+      </AuthWrapper>
+    </QueryWrapper>
   );
 }
 

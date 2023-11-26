@@ -14,9 +14,8 @@ export const columns: ColumnDef<Campus>[] = [
 
       return (
         <div className="flex w-full flex-col gap-2">
-          {offices.map((office) => (
-            <div key={office.name}>{office.name}</div>
-          ))}
+          {offices &&
+            offices.map((office) => <div key={office.name}>{office.name}</div>)}
         </div>
       );
     },

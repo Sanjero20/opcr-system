@@ -1,29 +1,25 @@
 'use client';
 
-import { getAccountsList } from '@/services/api/admin';
 import { DataTable } from './(table)/data-table';
 import { columns } from './(table)/columns';
-import { useEffect, useState } from 'react';
-import { Account } from '@/types/data-types';
+
+import { useQuery } from '@tanstack/react-query';
+import { getAccountsList } from '@/services/api/admin';
 
 function AccountsPage() {
-  const [accounts, setAccounts] = useState<Account[]>([]);
+  const { data, error, isLoading } = useQuery({
+    queryKey: ['accounts'],
+    queryFn: getAccountsList,
+    initialData: [],
+  });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data } = await getAccountsList();
-
-      if (data) {
-        setAccounts(data);
-      }
-    };
-
-    fetchData();
-  }, []);
+  if (error) {
+    return <div>Something went wrong...</div>;
+  }
 
   return (
     <div className="container">
-      <DataTable columns={columns} data={accounts} />
+      <DataTable columns={columns} data={data} />
     </div>
   );
 }
