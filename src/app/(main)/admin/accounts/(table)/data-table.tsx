@@ -25,6 +25,7 @@ import {
 
 import TableFilter from '@/components/table/filter';
 import TablePagination from '@/components/table/pagination';
+import ModalAddAccount from '../(modal)/modal-add';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -53,11 +54,7 @@ export function DataTable<TData, TValue>({
     <>
       <div className="flex h-fit items-center justify-between">
         <TableFilter table={table} filter="name" />
-
-        <Button className="flex gap-2" variant={'add'}>
-          Add Account
-          <Plus size={20} />
-        </Button>
+        <ModalAddAccount />
       </div>
 
       {/* Table */}
