@@ -51,7 +51,7 @@ export function ButtonAddCampus() {
 
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Add Campus</DialogTitle>
+          <DialogTitle>Create Campus</DialogTitle>
         </DialogHeader>
 
         <CampusForm formData={formData} setFormData={setFormData} />
@@ -69,7 +69,7 @@ export function ButtonAddCampus() {
             variant="add"
             onClick={() => handleSubmit.mutate()}
           >
-            Save changes
+            Create
           </Button>
         </DialogFooter>
       </DialogContent>

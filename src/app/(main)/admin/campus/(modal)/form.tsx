@@ -52,7 +52,12 @@ function CampusForm({ formData, setFormData }: CampusFormProps) {
 
   return (
     <div className="flex flex-col gap-2">
-      <Input type="text" value={formData.name} onChange={handleCampusChange} />
+      <Input
+        type="text"
+        value={formData.name}
+        onChange={handleCampusChange}
+        placeholder="Campus name"
+      />
 
       <h2 className="">Offices:</h2>
 
