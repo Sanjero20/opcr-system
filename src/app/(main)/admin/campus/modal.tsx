@@ -1,7 +1,7 @@
 'use client';
 
 import { ChangeEvent, useState } from 'react';
-import { X, Plus } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Input } from '@/components/ui/input';
@@ -14,8 +14,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import { X, Plus } from 'lucide-react';
 
 import { v4 as uuid } from 'uuid';
+import { createCampus } from '@/services/api/admin';
 
 type Office = {
   id: string;
@@ -23,6 +25,7 @@ type Office = {
 };
 
 export function ButtonAddCampus() {
+  const [campusName, setCampusName] = useState('');
   const [offices, setOffices] = useState<Office[]>([]);
   const [temp, setTemp] = useState('');
 
@@ -61,6 +64,11 @@ export function ButtonAddCampus() {
     setOffices(newOffices);
   };
 
+  const handleSubmit = async () => {
+    const response = await createCampus(campusName, offices);
+    console.log(response);
+  };
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -76,7 +84,12 @@ export function ButtonAddCampus() {
         </DialogHeader>
 
         <div className="flex flex-col gap-4">
-          <Input className="w-full" placeholder="Campus name" />
+          <Input
+            className="w-full"
+            value={campusName}
+            onChange={(e) => setCampusName(e.target.value)}
+            placeholder="Campus name"
+          />
           <Separator />
           <div className="flex w-full flex-col gap-1">
             <h2 className="font-bold text-gray-700">Offices</h2>
@@ -116,7 +129,12 @@ export function ButtonAddCampus() {
             </Button>
           </DialogClose>
 
-          <Button type="submit" className="w-1/2" variant="add">
+          <Button
+            type="submit"
+            className="w-1/2"
+            variant="add"
+            onClick={handleSubmit}
+          >
             Save changes
           </Button>
         </DialogFooter>
