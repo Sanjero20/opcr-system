@@ -1,11 +1,19 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
-import { AccountType } from '@/types/data-types';
+
+interface SelectAccountTypeProps {
+  form: any;
+}
 
 const values = ['admin', 'pmt', 'head', 'individual'];
 
-function SelectAccountType() {
+function SelectAccountType({ form }: SelectAccountTypeProps) {
   const [accountType, setAccountType] = useState('admin');
+
+  useEffect(() => {
+    form.setValue('permission', accountType);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [accountType]);
 
   return (
     <div className="flex items-center gap-2">

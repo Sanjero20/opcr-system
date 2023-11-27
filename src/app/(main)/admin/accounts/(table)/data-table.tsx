@@ -1,8 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Plus } from 'lucide-react';
 
 import {
   ColumnDef,
@@ -25,7 +23,7 @@ import {
 
 import TableFilter from '@/components/table/filter';
 import TablePagination from '@/components/table/pagination';
-import ModalAddAccount from '../(modal)/modal-add';
+import ModalAddAccount from '../(modal)/modal';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];

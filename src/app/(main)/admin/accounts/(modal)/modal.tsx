@@ -1,15 +1,43 @@
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogFooter, DialogHeader } from '@/components/ui/dialog';
 import {
-  DialogClose,
+  Dialog,
+  DialogHeader,
   DialogContent,
+  DialogFooter,
   DialogTitle,
   DialogTrigger,
+  DialogClose,
 } from '@/components/ui/dialog';
+
+import AccountForm from './form-account';
 import { Plus } from 'lucide-react';
-import AccountForm from './form';
+
+import { useMutation } from '@tanstack/react-query';
+import { queryClient } from '@/components/query-wrapper';
+import { Account } from '@/types/data-types';
+
+export type FormAccountType = Omit<Account, '_id'>;
+
+export const initialAccountData: FormAccountType = {
+  name: '',
+  username: '',
+  email: '',
+  password: '',
+  permission: '',
+  superior: '',
+};
 
 function ModalAddAccount() {
+  const [formData, setFormData] = useState(initialAccountData);
+
+  const handleSubmit = useMutation({
+    // mutationFn: () =>
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['accounts'] });
+    },
+  });
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -18,6 +46,7 @@ function ModalAddAccount() {
           <Plus />
         </Button>
       </DialogTrigger>
+
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Create Account</DialogTitle>
@@ -28,17 +57,18 @@ function ModalAddAccount() {
         <DialogFooter>
           <DialogClose asChild>
             <Button type="button" className="w-1/2" variant="outline">
-              Close
+              Cancel
             </Button>
           </DialogClose>
 
           <Button
             type="submit"
+            form="account-form"
             className="w-1/2"
             variant="add"
             // onClick={() => handleSubmit.mutate()}
           >
-            Save changes
+            Create
           </Button>
         </DialogFooter>
       </DialogContent>
