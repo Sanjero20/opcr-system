@@ -10,7 +10,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 
-import CampusForm from './form';
+import CampusForm from './form-campus';
 import ModalFooter from '@/components/modal/modal-footer';
 import { Plus } from 'lucide-react';
 
