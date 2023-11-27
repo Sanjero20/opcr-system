@@ -4,19 +4,20 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
-  DialogClose,
   DialogContent,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { Plus } from 'lucide-react';
 
 import CampusForm from './form';
+import ModalFooter from '@/components/modal/modal-footer';
+import { Plus } from 'lucide-react';
+
 import { useMutation } from '@tanstack/react-query';
 import { createCampus } from '@/services/api/admin';
 import { queryClient } from '@/components/query-wrapper';
+
 import { Campus } from '@/types/data-types';
 
 export type CampusFormType = Omit<Campus, '_id'>;
@@ -56,22 +57,7 @@ export function ButtonAddCampus() {
 
         <CampusForm formData={formData} setFormData={setFormData} />
 
-        <DialogFooter>
-          <DialogClose asChild>
-            <Button type="button" className="w-1/2" variant="outline">
-              Close
-            </Button>
-          </DialogClose>
-
-          <Button
-            type="submit"
-            className="w-1/2"
-            variant="add"
-            onClick={() => handleSubmit.mutate()}
-          >
-            Create
-          </Button>
-        </DialogFooter>
+        <ModalFooter handleSubmit={() => handleSubmit.mutate()} />
       </DialogContent>
     </Dialog>
   );
