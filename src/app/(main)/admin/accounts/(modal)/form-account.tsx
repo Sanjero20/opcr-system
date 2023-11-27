@@ -1,8 +1,5 @@
-import * as z from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { accountFormSchema } from '@/types/form-schema';
-import { Account } from '@/types/data-types';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import {
   Form,
@@ -15,11 +12,14 @@ import {
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 import SelectAccountType from './toggle-account-type';
-import { useEffect } from 'react';
 
-type AccountData = Omit<Account, '_id'>;
+import { useMutation } from '@tanstack/react-query';
+import { queryClient } from '@/components/query-wrapper';
 
-const initialAccountData: AccountData = {
+import { createAccount } from '@/services/api/admin';
+import { AccountFormType, accountFormSchema } from '@/types/form-schema';
+
+const initialAccountData: AccountFormType = {
   name: '',
   username: '',
   email: '',
@@ -30,25 +30,31 @@ const initialAccountData: AccountData = {
 
 const inputFields = ['Name', 'Username', 'Email', 'Password'];
 
-function AccountForm() {
-  const form = useForm<z.infer<typeof accountFormSchema>>({
+interface AccountFormProps {
+  closeModal: () => void;
+}
+
+function AccountForm({ closeModal }: AccountFormProps) {
+  const form = useForm<AccountFormType>({
     resolver: zodResolver(accountFormSchema),
     defaultValues: initialAccountData,
   });
 
-  const onSubmit = (values: z.infer<typeof accountFormSchema>) => {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-
-    console.table(values);
-  };
+  const handleSubmit = useMutation({
+    mutationFn: () => createAccount(form.getValues()),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['accounts'] });
+      closeModal();
+      form.reset();
+    },
+  });
 
   return (
     <Form {...form}>
       <form
         id="account-form"
         className="flex flex-col gap-2"
-        onSubmit={form.handleSubmit(onSubmit)}
+        onSubmit={form.handleSubmit(() => handleSubmit.mutate())}
       >
         {inputFields.map((inputField) => (
           <FormField

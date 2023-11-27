@@ -1,9 +1,10 @@
-import { ApiResponse, api } from './defaults';
+import { AccountFormType } from '@/types/form-schema';
+import { api } from './defaults';
 import { Account, Campus } from '@/types/data-types';
 
 api.defaults.baseURL += '/api/admin';
-// axios.defaults.withCredentials = true;
 
+// Accounts
 export async function getAccountsList(): Promise<Account[]> {
   try {
     const response = await api.get('/accounts');
@@ -14,6 +15,16 @@ export async function getAccountsList(): Promise<Account[]> {
   }
 }
 
+export async function createAccount(data: AccountFormType) {
+  try {
+    const response = await api.post(`/create/${data.permission}`, data);
+    return await response.data;
+  } catch (error) {
+    throw new Error('Failed to create a new account');
+  }
+}
+
+// Campus
 export async function getCampusList(): Promise<Campus[]> {
   try {
     const response = await api.get('/campuses');

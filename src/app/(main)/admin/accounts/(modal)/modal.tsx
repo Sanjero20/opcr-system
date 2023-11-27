@@ -13,33 +13,15 @@ import {
 import AccountForm from './form-account';
 import { Plus } from 'lucide-react';
 
-import { useMutation } from '@tanstack/react-query';
-import { queryClient } from '@/components/query-wrapper';
-import { Account } from '@/types/data-types';
-
-export type FormAccountType = Omit<Account, '_id'>;
-
-export const initialAccountData: FormAccountType = {
-  name: '',
-  username: '',
-  email: '',
-  password: '',
-  permission: '',
-  superior: '',
-};
-
 function ModalAddAccount() {
-  const [formData, setFormData] = useState(initialAccountData);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  const handleSubmit = useMutation({
-    // mutationFn: () =>
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['accounts'] });
-    },
-  });
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
 
   return (
-    <Dialog>
+    <Dialog open={modalIsOpen} onOpenChange={setModalIsOpen}>
       <DialogTrigger asChild>
         <Button variant="add">
           Add Account
@@ -52,7 +34,7 @@ function ModalAddAccount() {
           <DialogTitle>Create Account</DialogTitle>
         </DialogHeader>
 
-        <AccountForm />
+        <AccountForm closeModal={closeModal} />
 
         <DialogFooter>
           <DialogClose asChild>

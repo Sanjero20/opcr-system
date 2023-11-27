@@ -20,3 +20,5 @@ export const accountFormSchema = z
     },
     { message: 'Individual must have a superior.', path: ['superior'] },
   );
+
+export type AccountFormType = z.infer<typeof accountFormSchema>;
