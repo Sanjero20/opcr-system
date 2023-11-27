@@ -15,6 +15,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 import SelectAccountType from './toggle-account-type';
+import { useEffect } from 'react';
 
 type AccountData = Omit<Account, '_id'>;
 
@@ -69,6 +70,22 @@ function AccountForm() {
         <Separator />
 
         <SelectAccountType form={form} />
+
+        {form.watch('permission') === 'individual' && (
+          <FormField
+            name="superior"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem className="flex flex-col gap-0">
+                <FormLabel className="font-bold">Superior</FormLabel>
+                <FormControl>
+                  <Input placeholder="Superior" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        )}
       </form>
     </Form>
   );
