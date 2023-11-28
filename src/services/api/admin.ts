@@ -27,9 +27,9 @@ export async function createAccount(data: AccountFormType) {
   }
 }
 
-export async function getUnassignedHeadAccounts(): Promise<Account[]> {
+export async function getHeadAccounts(): Promise<Account[]> {
   try {
-    const response = await api.get(adminURL + '/accounts/head/unassigned');
+    const response = await api.get(adminURL + '/accounts/head');
     const accounts = await response.data;
     return accounts.data;
   } catch (error: any) {

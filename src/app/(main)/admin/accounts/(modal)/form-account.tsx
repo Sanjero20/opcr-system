@@ -79,7 +79,11 @@ function AccountForm({ closeModal }: AccountFormProps) {
               <FormItem className="flex flex-col gap-0">
                 <FormLabel className="font-bold">{inputField}</FormLabel>
                 <FormControl>
-                  <Input placeholder={inputField} {...field} />
+                  <Input
+                    placeholder={inputField}
+                    {...field}
+                    autoComplete="off"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
