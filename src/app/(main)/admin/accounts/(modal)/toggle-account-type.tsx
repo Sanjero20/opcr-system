@@ -1,17 +1,20 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from 'react';
+import { SetStateAction, useEffect } from 'react';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
-import { AccountType } from '@/types/data-types';
 
 interface SelectAccountTypeProps {
   form: any;
+  accountType: string;
+  setAccountType: React.Dispatch<SetStateAction<string>>;
 }
 
 const values = ['admin', 'pmt', 'head', 'individual'];
 
-function SelectAccountType({ form }: SelectAccountTypeProps) {
-  const [accountType, setAccountType] = useState('admin');
-
+function SelectAccountType({
+  form,
+  accountType,
+  setAccountType,
+}: SelectAccountTypeProps) {
   useEffect(() => {
     form.setValue('permission', accountType);
 

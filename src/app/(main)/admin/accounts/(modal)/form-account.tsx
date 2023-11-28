@@ -20,7 +20,9 @@ import { queryClient } from '@/components/query-wrapper';
 import { createAccount } from '@/services/api/admin';
 import { AccountFormType, accountFormSchema } from '@/types/form-schema';
 import { useEffect, useState } from 'react';
-import SelectSuperior from './select-superior';
+import SelectSuperior from './(parameters)/select-superior';
+import SelectCampus from './(parameters)/select-campus';
+import SelectOffice from './(parameters)/select-office';
 
 const initialAccountData: AccountFormType = {
   name: '',
@@ -39,6 +41,11 @@ interface AccountFormProps {
 
 function AccountForm({ closeModal }: AccountFormProps) {
   const [errorMsg, setErrorMsg] = useState('');
+  const [accountType, setAccountType] = useState(initialAccountData.permission);
+
+  // Optional variables for pmt & head
+  const [selectedCampus, setSelectedCampus] = useState('');
+  const [selectedOffice, setSelectedOffice] = useState('');
 
   const form = useForm<AccountFormType>({
     resolver: zodResolver(accountFormSchema),
@@ -47,7 +54,15 @@ function AccountForm({ closeModal }: AccountFormProps) {
 
   const handleSubmit = useMutation({
     mutationFn: () => createAccount(form.getValues()),
-    onSuccess: () => {
+    onSuccess: async (response) => {
+      const { id, permission } = response;
+
+      if (permission === 'pmt') {
+        //
+      } else if (permission === 'head') {
+        //
+      }
+
       queryClient.invalidateQueries({ queryKey: ['accounts'] });
       closeModal();
       form.reset();
@@ -93,9 +108,32 @@ function AccountForm({ closeModal }: AccountFormProps) {
 
         <Separator />
 
-        <SelectAccountType form={form} />
+        <SelectAccountType
+          form={form}
+          accountType={accountType}
+          setAccountType={setAccountType}
+        />
 
-        {form.watch('permission') === 'individual' && (
+        {/* Will show if account type is pmt */}
+        {accountType == 'pmt' && (
+          <>
+            <SelectCampus setSelectedCampus={setSelectedCampus} />
+          </>
+        )}
+
+        {/* Will show if account type is head */}
+        {accountType == 'head' && (
+          <>
+            <SelectCampus setSelectedCampus={setSelectedCampus} />
+            <SelectOffice
+              selectedCampus={selectedCampus}
+              setSelectedOffice={setSelectedOffice}
+            />
+          </>
+        )}
+
+        {/* Will show if account type is individual */}
+        {accountType == 'individual' && (
           <>
             <SelectSuperior form={form} />
 

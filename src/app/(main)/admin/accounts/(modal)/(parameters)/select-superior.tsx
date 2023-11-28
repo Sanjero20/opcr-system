@@ -20,7 +20,6 @@ import {
 } from '@/components/ui/popover';
 import { useQuery } from '@tanstack/react-query';
 import { getHeadAccounts } from '@/services/api/admin';
-import { FormMessage } from '@/components/ui/form';
 
 interface SelectSuperiorProps {
   form: any;
@@ -31,7 +30,7 @@ function SelectSuperior({ form }: SelectSuperiorProps) {
   const [value, setValue] = useState('');
 
   const { data: accounts, error } = useQuery({
-    queryKey: ['unassigned-head-accounts'],
+    queryKey: ['head-accounts'],
     queryFn: getHeadAccounts,
     initialData: [],
   });
@@ -88,8 +87,6 @@ function SelectSuperior({ form }: SelectSuperiorProps) {
                   {account.name}
                 </CommandItem>
               ))}
-
-              <FormMessage />
             </CommandGroup>
           </Command>
         </PopoverContent>

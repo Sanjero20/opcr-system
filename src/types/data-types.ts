@@ -11,14 +11,22 @@ export type Account = {
 };
 
 export type Office = {
+  _id: { $oid: string };
   name: string;
   head: string;
-  opcr: string[];
+  opcr: any[];
 };
 
 export type Campus = {
-  _id: string;
+  _id: { $oid: string };
   name: string;
   offices: Office[];
   pmt: string[];
+};
+
+export type AccountCreated = {
+  id: string;
+  created: boolean;
+  error: any;
+  permission: 'head' | 'pmt' | 'indiv';
 };

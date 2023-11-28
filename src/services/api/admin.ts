@@ -1,6 +1,6 @@
 import { AccountFormType } from '@/types/form-schema';
 import { api } from './defaults';
-import { Account, Campus } from '@/types/data-types';
+import { Account, AccountCreated, Campus, Office } from '@/types/data-types';
 
 const adminURL = '/api/admin';
 
@@ -15,7 +15,9 @@ export async function getAccountsList(): Promise<Account[]> {
   }
 }
 
-export async function createAccount(data: AccountFormType) {
+export async function createAccount(
+  data: AccountFormType,
+): Promise<AccountCreated> {
   try {
     const response = await api.post(
       adminURL + `/create/${data.permission}`,
@@ -45,6 +47,18 @@ export async function getCampusList(): Promise<Campus[]> {
     return campuses.data;
   } catch (error) {
     throw new Error('Failed to fetch campuses.');
+  }
+}
+
+export async function getOfficesByCampusId(
+  campusId: string,
+): Promise<Office[]> {
+  try {
+    const response = await api.get(adminURL + `/departments/${campusId}`);
+    const offices = await response.data;
+    return offices.data;
+  } catch (error) {
+    throw new Error('Failed to fetch offices');
   }
 }
 
