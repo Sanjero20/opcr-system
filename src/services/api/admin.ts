@@ -27,6 +27,16 @@ export async function createAccount(data: AccountFormType) {
   }
 }
 
+export async function getUnassignedHeadAccounts(): Promise<Account[]> {
+  try {
+    const response = await api.get(adminURL + '/accounts/head/unassigned');
+    const accounts = await response.data;
+    return accounts.data;
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+}
+
 // Campus
 export async function getCampusList(): Promise<Campus[]> {
   try {

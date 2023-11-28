@@ -1,5 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
+import { AccountType } from '@/types/data-types';
 
 interface SelectAccountTypeProps {
   form: any;
@@ -12,7 +14,10 @@ function SelectAccountType({ form }: SelectAccountTypeProps) {
 
   useEffect(() => {
     form.setValue('permission', accountType);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    if (accountType !== 'individual') {
+      form.setValue('superior', '');
+    }
   }, [accountType]);
 
   return (

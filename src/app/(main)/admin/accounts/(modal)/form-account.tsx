@@ -20,6 +20,7 @@ import { queryClient } from '@/components/query-wrapper';
 import { createAccount } from '@/services/api/admin';
 import { AccountFormType, accountFormSchema } from '@/types/form-schema';
 import { useEffect, useState } from 'react';
+import SelectSuperior from './select-superior';
 
 const initialAccountData: AccountFormType = {
   name: '',
@@ -65,7 +66,9 @@ function AccountForm({ closeModal }: AccountFormProps) {
       <form
         id="account-form"
         className="flex flex-col gap-2"
-        onSubmit={form.handleSubmit(() => handleSubmit.mutate())}
+        onSubmit={form.handleSubmit(() => {
+          handleSubmit.mutate();
+        })}
       >
         {inputFields.map((inputField) => (
           <FormField
@@ -89,19 +92,16 @@ function AccountForm({ closeModal }: AccountFormProps) {
         <SelectAccountType form={form} />
 
         {form.watch('permission') === 'individual' && (
-          <FormField
-            name="superior"
-            control={form.control}
-            render={({ field }) => (
-              <FormItem className="flex flex-col gap-0">
-                <FormLabel className="font-bold">Superior</FormLabel>
-                <FormControl>
-                  <Input placeholder="Superior" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
+          <>
+            <SelectSuperior form={form} />
+
+            {form.watch('superior') === '' && (
+              <FormMessage>
+                {form.getFieldState('superior').invalid &&
+                  'Individual must have a superior.'}
+              </FormMessage>
             )}
-          />
+          </>
         )}
       </form>
 
