@@ -73,3 +73,33 @@ export async function createCampus(name: string, offices: any[]) {
     throw new Error('Failed to create campus');
   }
 }
+
+// Assign
+export async function assignPMTToCampus(pmtid: string, campus: string) {
+  try {
+    const response = await api.post(adminURL + '/assign/pmt/campus', {
+      pmtid,
+      campus,
+    });
+    return await response.data;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+}
+
+export async function assignHeadToOffice(
+  headid: string,
+  campusid: string,
+  departmentid: string,
+) {
+  try {
+    const response = await api.post(adminURL + '/assign/head/campus', {
+      campusid,
+      departmentid,
+      headid,
+    });
+    return await response.data;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+}

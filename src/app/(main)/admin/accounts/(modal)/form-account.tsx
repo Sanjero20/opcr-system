@@ -17,7 +17,11 @@ import SelectAccountType from './toggle-account-type';
 import { useMutation } from '@tanstack/react-query';
 import { queryClient } from '@/components/query-wrapper';
 
-import { createAccount } from '@/services/api/admin';
+import {
+  assignHeadToOffice,
+  assignPMTToCampus,
+  createAccount,
+} from '@/services/api/admin';
 import { AccountFormType, accountFormSchema } from '@/types/form-schema';
 import { useEffect, useState } from 'react';
 import SelectSuperior from './(parameters)/select-superior';
@@ -58,9 +62,13 @@ function AccountForm({ closeModal }: AccountFormProps) {
       const { id, permission } = response;
 
       if (permission === 'pmt') {
-        //
+        const response = await assignPMTToCampus(id, selectedCampus);
       } else if (permission === 'head') {
-        //
+        const response = await assignHeadToOffice(
+          id,
+          selectedCampus,
+          selectedOffice,
+        );
       }
 
       queryClient.invalidateQueries({ queryKey: ['accounts'] });
