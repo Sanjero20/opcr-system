@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -18,6 +19,7 @@ import { queryClient } from '@/components/query-wrapper';
 
 import { createAccount } from '@/services/api/admin';
 import { AccountFormType, accountFormSchema } from '@/types/form-schema';
+import { useEffect, useState } from 'react';
 
 const initialAccountData: AccountFormType = {
   name: '',
@@ -35,6 +37,8 @@ interface AccountFormProps {
 }
 
 function AccountForm({ closeModal }: AccountFormProps) {
+  const [errorMsg, setErrorMsg] = useState('');
+
   const form = useForm<AccountFormType>({
     resolver: zodResolver(accountFormSchema),
     defaultValues: initialAccountData,
@@ -47,7 +51,14 @@ function AccountForm({ closeModal }: AccountFormProps) {
       closeModal();
       form.reset();
     },
+    onError: (error: any) => {
+      setErrorMsg(error.message);
+    },
   });
+
+  useEffect(() => {
+    if (errorMsg) setErrorMsg('');
+  }, [form.formState.isValidating]);
 
   return (
     <Form {...form}>
@@ -93,6 +104,8 @@ function AccountForm({ closeModal }: AccountFormProps) {
           />
         )}
       </form>
+
+      {errorMsg && <FormMessage>{errorMsg} </FormMessage>}
     </Form>
   );
 }
