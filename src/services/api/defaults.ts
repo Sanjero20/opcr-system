@@ -8,6 +8,7 @@ export type ApiResponse<T> = {
 
 export const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+  withCredentials: true,
 });
 
 // api.interceptors.request.use(

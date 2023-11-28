@@ -2,6 +2,7 @@ import axios from 'axios';
 import { AccountType } from '@/types/data-types';
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL;
+axios.defaults.withCredentials = false;
 
 export type LoginResponse = {
   error: string | null;
@@ -15,7 +16,7 @@ export async function login(
   password: string,
 ): Promise<LoginResponse> {
   try {
-    const response = await axios.post('/login', {
+    const response = await axios.post('/api/login', {
       email: username,
       password,
     });
