@@ -21,9 +21,9 @@ function UserLayout() {
   if (!permission) return;
 
   return (
-    <div>
+    <div className="flex h-screen min-h-screen flex-col">
       <Header />
-      <main className="container py-2">
+      <main className="container flex-1 py-2">
         <Outlet />
       </main>
     </div>
