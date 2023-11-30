@@ -1,12 +1,8 @@
+/* eslint-disable no-undef */
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ['class'],
-  content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-  ],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     container: {
       center: true,
@@ -17,7 +13,7 @@ module.exports = {
     },
     extend: {
       colors: {
-        nav: '#853030',
+        primaryColor: '#853030',
         tableHead: '#6A5E52',
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',

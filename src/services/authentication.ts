@@ -1,26 +1,22 @@
-import axios from 'axios';
-import { AccountType } from '@/types/data-types';
-
-axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL;
-axios.defaults.withCredentials = false;
+import { api } from '.';
+import { Permission } from '@/types';
 
 export type LoginResponse = {
   error: string | null;
   loggedIn: boolean;
-  permission: AccountType;
+  permission: Permission;
   token: string;
 };
 
-export async function login(
+export async function loginAccount(
   username: string,
   password: string,
 ): Promise<LoginResponse> {
   try {
-    const response = await axios.post('/api/login', {
+    const response = await api.post('/login', {
       email: username,
       password,
     });
-
     return await response.data;
   } catch (error: any) {
     return error.response.data;

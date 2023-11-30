@@ -6,12 +6,12 @@ import MainTable from './contents/main';
 
 function FormOpcr() {
   return (
-    <main className="">
+    <div className="">
       <Header />
       <Guidelines />
       <MainTable />
       {/* Footer */}
-    </main>
+    </div>
   );
 }
 

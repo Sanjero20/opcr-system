@@ -1,12 +1,11 @@
 import styles from './metadata.module.scss';
-import Image from 'next/image';
 
 function MetaData() {
   return (
     <thead className={styles.metadata}>
       <tr>
         <td>
-          <Image
+          <img
             width={60}
             height={60}
             src={'/logo.png'}
