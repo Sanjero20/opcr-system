@@ -10,12 +10,10 @@ interface OpcrActions {
   addTarget: () => void;
   deleteTarget: (index: number) => void;
   handleTarget: (e: ChangeEvent<HTMLInputElement>, targetIndex: number) => void;
-}
 
-const initialTarget: Target = {
-  name: '',
-  success: [],
-};
+  addSuccessIndicator: () => void;
+  deleteSuccessIndicator: () => void;
+}
 
 const initialSuccessIndicator: SuccessIndicator = {
   accomplishment: '',
@@ -25,6 +23,11 @@ const initialSuccessIndicator: SuccessIndicator = {
   indicator: '',
   rating: [0, 0, 0, 0],
   remarks: [''],
+};
+
+const initialTarget: Target = {
+  name: '',
+  success: [initialSuccessIndicator],
 };
 
 export const useOpcr = create<OpcrStates & OpcrActions>((set, get) => ({
@@ -51,4 +54,8 @@ export const useOpcr = create<OpcrStates & OpcrActions>((set, get) => ({
 
     set({ targets: updatedTargets });
   },
+
+  addSuccessIndicator: () => {},
+
+  deleteSuccessIndicator: () => {},
 }));

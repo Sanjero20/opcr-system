@@ -62,5 +62,13 @@
 }
 
 .title {
-  @apply text-center text-4xl font-bold text-slate-700;
+  @apply text-center text-3xl font-bold text-slate-700;
+}
+
+.bg-tableBody {
+  @apply bg-slate-200;
+}
+
+p.title {
+  @apply font-bold text-black/70;
 }

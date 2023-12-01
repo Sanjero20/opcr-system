@@ -1,15 +1,19 @@
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
 
-function ButtonControl() {
+interface ButtonControlProps {
+  route: '/opcr' | '/opcr/edit';
+}
+
+function ButtonControl({ route }: ButtonControlProps) {
   const navigate = useNavigate();
 
   const cancelChanges = () => {
-    navigate('/opcr');
+    navigate(route);
   };
 
   const saveChanges = () => {
-    navigate('/opcr');
+    navigate(route);
   };
 
   return (

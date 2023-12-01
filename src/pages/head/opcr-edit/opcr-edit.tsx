@@ -19,7 +19,7 @@ function OpcrEditPage() {
 
   return (
     <div className="flex h-full flex-col gap-2">
-      <h1 className="title">OPCR EDIT</h1>
+      <h1 className="title">OPCR FORM EDIT</h1>
 
       <OpcrEditHeader />
 
@@ -32,7 +32,7 @@ function OpcrEditPage() {
           </div>
         </div>
 
-        <div className="flex h-full flex-1 flex-col gap-2 bg-slate-200 p-4">
+        <div className="bg-tableBody flex h-full flex-1 flex-col gap-2 p-4">
           {/* Template */}
           {targets &&
             targets.map((target, index) => (
@@ -65,7 +65,7 @@ function OpcrEditPage() {
         </div>
       </section>
 
-      <ButtonControl />
+      <ButtonControl route="/opcr" />
     </div>
   );
 }
