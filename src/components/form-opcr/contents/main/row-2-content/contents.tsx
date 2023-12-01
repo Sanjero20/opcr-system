@@ -23,10 +23,10 @@ function Contents() {
                 <tr className={styles.content} key={index}>
                   {/* Major Final Output */}
                   {index == 0 ? (
-                    <td rowSpan={target.success.length}>{target.name}</td>
+                    <td rowSpan={target.success.length}>{name}</td>
                   ) : null}
 
-                  <SuccessIndicators data={target.success} />
+                  <SuccessIndicators data={success} />
 
                   <Rating rating={target.success[index].rating} />
 
