@@ -1,10 +1,22 @@
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import OpcrEditHeader from './opcr-edit-header';
-import ButtonControl from './button-control';
 import { Plus } from 'lucide-react';
 
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+
+import OpcrEditHeader from './opcr-edit-header';
+import ButtonControl from './button-control';
+
+import { useNavigate } from 'react-router-dom';
+import { useOpcr } from '@/stores/opcr-store';
+
 function OpcrEditPage() {
+  const { targets, addTarget, deleteTarget, handleTarget } = useOpcr();
+
+  const navigate = useNavigate();
+
+  console.clear();
+  console.table(targets);
+
   return (
     <div className="flex h-full flex-col gap-2">
       <h1 className="title">OPCR EDIT</h1>
@@ -13,27 +25,43 @@ function OpcrEditPage() {
 
       {/* OPCR MAIN DATA */}
       <section className="flex flex-1 flex-col ">
-        <div className="relative flex items-center justify-center rounded bg-tableHead py-4 text-center text-white">
+        <div className="relative flex items-center justify-center rounded-t bg-tableHead py-4 text-center text-white">
           Major Final Output / Projects / Programs List
           <div className="absolute right-4 cursor-pointer rounded-sm p-1 font-bold hover:bg-muted/30">
-            <Plus />
+            <Plus onClick={addTarget} />
           </div>
         </div>
 
-        <div className="h-full flex-1 bg-slate-200 p-4">
+        <div className="flex h-full flex-1 flex-col gap-2 bg-slate-200 p-4">
           {/* Template */}
-          <div className="flex gap-4">
-            <Input placeholder="" />
+          {targets &&
+            targets.map((target, index) => (
+              <div key={index} className="flex gap-4">
+                <Input
+                  placeholder=""
+                  value={target.name}
+                  onChange={(e) => handleTarget(e, index)}
+                />
 
-            <div className="flex gap-2">
-              <Button className="w-24" variant={'edit'}>
-                Edit
-              </Button>
-              <Button className="w-24" variant={'destructive'}>
-                Delete
-              </Button>
-            </div>
-          </div>
+                <div className="flex gap-2">
+                  <Button
+                    className="w-24"
+                    variant={'edit'}
+                    onClick={() => navigate(`./${index}`)}
+                  >
+                    Edit
+                  </Button>
+
+                  <Button
+                    className="w-24"
+                    variant={'destructive'}
+                    onClick={() => deleteTarget(index)}
+                  >
+                    Delete
+                  </Button>
+                </div>
+              </div>
+            ))}
         </div>
       </section>
 
