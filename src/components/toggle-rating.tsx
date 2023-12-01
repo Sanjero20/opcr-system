@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { ToggleGroup, ToggleGroupItem } from './ui/toggle-group';
-import { cn } from '@/lib/utils';
 
 const values = ['q', 'e', 't', 'a'];
 
@@ -13,11 +12,11 @@ function ToggleRating() {
     setRating(newRating);
   };
 
-  console.clear();
-  console.log(rating);
-
   return (
-    <ToggleGroup type="multiple" className="dark flex justify-start gap-2">
+    <ToggleGroup
+      type="multiple"
+      className="dark col-span-2 flex justify-start gap-2"
+    >
       {values.map((value, index) => (
         <ToggleGroupItem
           key={value}

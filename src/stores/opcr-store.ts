@@ -9,10 +9,15 @@ interface OpcrStates {
 interface OpcrActions {
   addTarget: () => void;
   deleteTarget: (index: number) => void;
-  handleTarget: (e: ChangeEvent<HTMLInputElement>, targetIndex: number) => void;
+  handleTarget: (e: ChangeEvent<HTMLInputElement>, index: number) => void;
 
-  addSuccessIndicator: () => void;
-  deleteSuccessIndicator: () => void;
+  addSuccessIndicator: (targetIndex: number) => void;
+  deleteSuccessIndicator: (targetIndex: number, successIndex: number) => void;
+  handleSuccessIndicator: (
+    e: ChangeEvent<HTMLInputElement>,
+    targetIndex: number,
+    successIndex: number,
+  ) => void;
 }
 
 const initialSuccessIndicator: SuccessIndicator = {
@@ -33,6 +38,7 @@ const initialTarget: Target = {
 export const useOpcr = create<OpcrStates & OpcrActions>((set, get) => ({
   targets: [initialTarget],
 
+  // Target
   addTarget: () => {
     const latestTargets = get().targets;
     set({ targets: [...latestTargets, initialTarget] });
@@ -55,7 +61,42 @@ export const useOpcr = create<OpcrStates & OpcrActions>((set, get) => ({
     set({ targets: updatedTargets });
   },
 
-  addSuccessIndicator: () => {},
+  // Sucess
+  addSuccessIndicator: (targetIndex) => {
+    const targets = get().targets;
 
-  deleteSuccessIndicator: () => {},
+    const updatedTargets = targets.map((target, index) => {
+      return index === targetIndex
+        ? { ...target, success: [...target.success, initialSuccessIndicator] }
+        : target;
+    });
+
+    set({ targets: updatedTargets });
+  },
+
+  deleteSuccessIndicator: (targetIndex, successIndex) => {
+    const targets = get().targets;
+
+    const updatedTargets = targets.map((target, index) => {
+      if (index === targetIndex) {
+        const updatedSuccessIndicators = target.success.filter(
+          (val, index) => index !== successIndex,
+        );
+
+        return {
+          ...target,
+          success: updatedSuccessIndicators,
+        };
+      }
+
+      return target;
+    });
+
+    set({ targets: updatedTargets });
+  },
+
+  handleSuccessIndicator: (e, targetIndex) => {
+    const { name, value } = e.target;
+    console.log(name, value);
+  },
 }));

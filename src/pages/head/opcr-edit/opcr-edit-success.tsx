@@ -1,20 +1,27 @@
+import { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import InputFields from './opcr-fields';
 import ButtonControl from './button-control';
+
 import { useOpcr } from '@/stores/opcr-store';
-import { useState } from 'react';
-import ToggleRating from '@/components/toggle-rating';
 
 function OpcrEditSuccessIndicator() {
+  const { targets, handleTarget } = useOpcr();
+  const { addSuccessIndicator } = useOpcr();
+
   const params = useParams();
 
-  const { targets, handleTarget } = useOpcr();
+  const targetIndex = useMemo(() => Number(params.id), [params]);
 
-  if (!params) return;
-
-  console.clear();
-  console.log(targets[Number(params.id)].success);
+  if (
+    (!targetIndex && targetIndex !== 0) ||
+    targetIndex < 0 ||
+    targetIndex > targets.length - 1
+  )
+    return <>Invalid target ID</>;
 
   return (
     <div className="flex h-full flex-col gap-2">
@@ -32,20 +39,28 @@ function OpcrEditSuccessIndicator() {
           onChange={(e) => handleTarget(e, Number(params.id))}
         />
 
-        <div className="grid grid-cols-6 gap-2 font-bold text-black/70">
-          <p className="col-span-2">Target/Success Indicator</p>
-          <p className="col-span-1">Alloted Budget</p>
-          <p className="col-span-2">Divisions / Individuals Accountable</p>
-          <p className="col-span-1">Rating</p>
+        <div className="grid grid-cols-12 gap-2 font-bold text-black/70">
+          {/* Columns Start */}
+          <p className="col-span-4">Target/Success Indicator</p>
+          <p className="col-span-2">Alloted Budget</p>
+          <p className="col-span-3">Divisions / Individuals Accountable</p>
+          <p className="col-span-2">Rating</p>
+          <p />
+          {/* Columns End */}
 
-          {/* Template */}
-          <>
-            <Input className="col-span-2" />
-            <Input className="col-span-1" />
-            <Input className="col-span-2" />
-            <ToggleRating />
-          </>
+          <InputFields
+            targetIndex={targetIndex}
+            data={targets[targetIndex].success}
+          />
         </div>
+
+        <Button
+          className="w-24 self-center"
+          variant={'add'}
+          onClick={() => addSuccessIndicator(Number(params.id))}
+        >
+          Add
+        </Button>
       </section>
 
       <ButtonControl route="/opcr/edit" />
