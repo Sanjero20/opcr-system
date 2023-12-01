@@ -44,7 +44,7 @@ function ButtonCampusAdd() {
     <Dialog open={modalIsOpen} onOpenChange={setModalIsOpen}>
       <DialogTrigger asChild>
         <Button variant="add">
-          Add Account
+          Add Campus
           <Plus />
         </Button>
       </DialogTrigger>
