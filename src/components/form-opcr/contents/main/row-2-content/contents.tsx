@@ -1,28 +1,49 @@
-import { useOpcr } from '@/stores/opcr-store';
+import React from 'react';
 import styles from './contents.module.scss';
+
 import SuccessIndicators from './success-indicators';
 import Rating from './rating';
+
+import { useOpcr } from '@/stores/opcr-store';
 
 function Contents() {
   const { targets } = useOpcr();
 
+  console.log(targets);
+
   return (
     <tbody>
       {targets &&
-        targets.map((target, index) => (
-          <tr className={styles.content} key={index}>
-            {/* Major Final Output */}
-            <td>{target.name}</td>
+        targets.map((target, index) => {
+          const { name, success } = target;
 
-            <SuccessIndicators data={target.success} />
-            <Rating rating={target.success[index].rating} />
+          return (
+            <React.Fragment key={index}>
+              {success.map((success, index) => (
+                <tr className={styles.content} key={index}>
+                  {/* Major Final Output */}
+                  {index == 0 ? (
+                    <td rowSpan={target.success.length}>{target.name}</td>
+                  ) : null}
 
-            {/* Remarks */}
-            <td>
-              <textarea name="" id="" className="h-full resize-none" disabled />
-            </td>
-          </tr>
-        ))}
+                  <SuccessIndicators data={target.success} />
+
+                  <Rating rating={target.success[index].rating} />
+
+                  {/* Remarks */}
+                  <td>
+                    <textarea
+                      name=""
+                      id=""
+                      className="h-full resize-none"
+                      disabled
+                    />
+                  </td>
+                </tr>
+              ))}
+            </React.Fragment>
+          );
+        })}
       {/* Sample End */}
     </tbody>
   );
