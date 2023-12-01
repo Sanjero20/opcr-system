@@ -1,42 +1,28 @@
+import { useOpcr } from '@/stores/opcr-store';
 import styles from './contents.module.scss';
+import SuccessIndicators from './success-indicators';
+import Rating from './rating';
 
 function Contents() {
+  const { targets } = useOpcr();
+
   return (
     <tbody>
-      {/* Sample row*/}
-      <tr className={styles.content}>
-        <td>Major Output </td>
+      {targets &&
+        targets.map((target, index) => (
+          <tr className={styles.content} key={index}>
+            {/* Major Final Output */}
+            <td>{target.name}</td>
 
-        {/* Key Success Indicators */}
-        <td>
-          <pre>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Labore
-            omnis similique consequuntur quaerat. Quas impedit at hic libero vel
-            corporis aliquam et obcaecati aut, ipsam saepe minus eaque
-            perferendis ad!
-          </pre>
-        </td>
+            <SuccessIndicators data={target.success} />
+            <Rating rating={target.success[index].rating} />
 
-        {/* Alloted Budget */}
-        <td></td>
-
-        {/* Division/Individual Accountable  */}
-        <td></td>
-
-        {/* Actual Accomplishment */}
-        <td></td>
-
-        {/* Rating */}
-        <td />
-        <td />
-        <td />
-        <td />
-
-        {/* Remarks */}
-        <td>
-          <textarea name="" id="" className="h-full resize-none" disabled />
-        </td>
-      </tr>
+            {/* Remarks */}
+            <td>
+              <textarea name="" id="" className="h-full resize-none" disabled />
+            </td>
+          </tr>
+        ))}
       {/* Sample End */}
     </tbody>
   );
