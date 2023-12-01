@@ -95,8 +95,34 @@ export const useOpcr = create<OpcrStates & OpcrActions>((set, get) => ({
     set({ targets: updatedTargets });
   },
 
-  handleSuccessIndicator: (e, targetIndex) => {
+  handleSuccessIndicator: (e, targetIndex, indicatorIndex) => {
     const { name, value } = e.target;
-    console.log(name, value);
+
+    const targets = get().targets;
+
+    const updatedTargets = targets.map((target, index) => {
+      if (index === targetIndex) {
+        const updatedSuccessIndicators = target.success.map(
+          (indicator, index) => {
+            if (index === indicatorIndex) {
+              return {
+                ...indicator,
+                [name]: value,
+              };
+            }
+            return indicator;
+          },
+        );
+
+        return {
+          ...target,
+          success: updatedSuccessIndicators,
+        };
+      }
+
+      return target;
+    });
+
+    set({ targets: updatedTargets });
   },
 }));

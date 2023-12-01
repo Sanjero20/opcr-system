@@ -18,9 +18,26 @@ function InputFields({ targetIndex, data }: InputFieldsProps) {
     <>
       {data.map((success, index) => (
         <React.Fragment key={index}>
-          <Input name="indicator" className="col-span-4 font-normal" />
-          <Input name="budget" className="col-span-2 font-normal" />
-          <Input name="division" className="col-span-3 font-normal" />
+          <Input
+            name="indicator"
+            className="col-span-4 font-normal"
+            value={data[index].indicator}
+            onChange={(e) => handleSuccessIndicator(e, targetIndex, index)}
+          />
+
+          <Input
+            name="budget"
+            className="col-span-2 font-normal"
+            value={data[index].budget}
+            onChange={(e) => handleSuccessIndicator(e, targetIndex, index)}
+          />
+
+          <Input
+            name="division"
+            className="col-span-3 font-normal"
+            value={data[index].division}
+            onChange={(e) => handleSuccessIndicator(e, targetIndex, index)}
+          />
 
           <ToggleRating />
 
