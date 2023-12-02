@@ -27,7 +27,7 @@ export const campusColumns: ColumnDef<Campus>[] = [
       return (
         <div className="flex flex-col justify-center">
           <div className="flex gap-2">
-            <Button variant={'outline'}>update</Button>
+            <Button variant="edit">update</Button>
             <Button variant={'destructive'}>delete</Button>
           </div>
         </div>

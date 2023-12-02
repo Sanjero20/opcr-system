@@ -9,6 +9,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
+import { useToast } from '@/components/ui/use-toast';
 
 import ModalFooter from '@/components/modal/modal-footer';
 import FormCampus from '@/pages/admin/campuses/form/form-campus';
@@ -27,13 +28,16 @@ export type CampusFormType = typeof initialFormData;
 function ButtonCampusAdd() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [formData, setFormData] = useState<CampusFormType>(initialFormData);
-
+  const { toast } = useToast();
   const handleSubmit = useMutation({
     mutationFn: () => createCampus(formData.name, formData.offices),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['campuses'] });
       setModalIsOpen(false);
       setFormData(initialFormData);
+      toast({
+        title: 'Campus Successfully Added!',
+      });
     },
   });
 
