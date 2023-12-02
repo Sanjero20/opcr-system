@@ -61,7 +61,7 @@ function SelectCampus({ setSelectedCampus }: SelectSuperiorProps) {
         <PopoverContent className="w-full p-0">
           <Command>
             <CommandInput placeholder="Search campus..." />
-            <CommandEmpty>No account found.</CommandEmpty>
+            <CommandEmpty>No campus found.</CommandEmpty>
             <CommandGroup>
               {/*  */}
               {campuses.map((campus) => (

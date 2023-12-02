@@ -36,7 +36,7 @@ const initialAccountData: AccountFormType = {
   username: '',
   email: '',
   password: '',
-  permission: 'admin',
+  permission: 'pmt',
   superior: '',
 };
 

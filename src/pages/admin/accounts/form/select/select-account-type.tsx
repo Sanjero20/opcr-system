@@ -8,7 +8,7 @@ interface SelectAccountTypeProps {
   setAccountType: React.Dispatch<SetStateAction<string>>;
 }
 
-const values = ['admin', 'pmt', 'head', 'individual'];
+const values = ['pmt', 'head', 'individual'];
 
 function SelectAccountType({
   form,
@@ -28,14 +28,14 @@ function SelectAccountType({
       <ToggleGroup
         type="single"
         variant="outline"
-        className="dark grid grid-cols-4"
+        className="dark grid w-full grid-cols-3"
         value={accountType}
       >
         {values.map((value) => (
           <ToggleGroupItem
             key={value}
             value={value}
-            className="capitalize"
+            className="w-full capitalize"
             onClick={() => setAccountType(value)}
           >
             {value}
