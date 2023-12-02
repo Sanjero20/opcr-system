@@ -19,6 +19,6 @@ export async function loginAccount(
     });
     return await response.data;
   } catch (error: any) {
-    return error.response.data;
+    return error.response;
   }
 }
