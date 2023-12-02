@@ -17,14 +17,12 @@ function ButtonLogout() {
   const handleLogout = () => {
     removeCookie('permission');
     removeCookie('token');
-
-    // Perform logout actions here
     navigate('/login');
   };
 
   return (
     <Dialog>
-      <DialogTrigger>
+      <DialogTrigger asChild>
         <Button className={`text-md bg-transparent hover:bg-transparent`}>
           Logout
         </Button>
@@ -36,9 +34,7 @@ function ButtonLogout() {
         <DialogFooter>
           <Button
             className={`text-md bg-red-500 hover:bg-red-700`}
-            onClick={() => {
-              handleLogout();
-            }}
+            onClick={handleLogout}
           >
             Logout
           </Button>
