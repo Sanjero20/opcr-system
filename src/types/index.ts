@@ -30,3 +30,10 @@ export type AccountCreated = {
   error: any;
   permission: 'head' | 'pmt' | 'indiv';
 };
+
+export type PMT_Office = {
+  _id: { $oid: string };
+  name: string;
+  status: 'calibrated' | 'in progress' | 'rejected';
+  progress: number;
+};
