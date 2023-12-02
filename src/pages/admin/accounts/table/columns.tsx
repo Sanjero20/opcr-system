@@ -20,16 +20,13 @@ export const columnsAccount: ColumnDef<Account>[] = [
   {
     id: 'actions',
     cell: ({ row }) => {
-      // const rowValue = row.original;
-      // use row value to get row id
-      const handleDelete = () => {
-        console.log('clicked');
-      };
+      const { _id } = row.original;
+
       return (
         <div className="flex flex-col justify-center">
           <div className="flex gap-2">
             <Button variant="edit">update</Button>
-            <DeleteAccountDialog onDelete={handleDelete} />
+            <DeleteAccountDialog id={_id.$oid} />
           </div>
         </div>
       );

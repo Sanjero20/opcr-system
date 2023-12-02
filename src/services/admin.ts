@@ -29,6 +29,15 @@ export async function createAccount(
   }
 }
 
+export async function deleteAccount(id: string) {
+  try {
+    const response = await api.delete(adminURL + `/account/delete/${id}`);
+    return await response.data;
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+}
+
 export async function getHeadAccounts(): Promise<Account[]> {
   try {
     const response = await api.get(adminURL + '/accounts/head');
