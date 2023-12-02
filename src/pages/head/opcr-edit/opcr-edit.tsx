@@ -14,9 +14,6 @@ function OpcrEditPage() {
 
   const navigate = useNavigate();
 
-  console.clear();
-  console.table(targets);
-
   return (
     <div className="flex h-full flex-col gap-2">
       <h1 className="title">OPCR FORM EDIT</h1>
@@ -27,9 +24,12 @@ function OpcrEditPage() {
       <section className="flex flex-1 flex-col ">
         <div className="relative flex items-center justify-center rounded-t bg-tableHead py-4 text-center text-white">
           Major Final Output / Projects / Programs List
-          <div className="absolute right-4 cursor-pointer rounded-sm p-1 font-bold hover:bg-muted/30">
-            <Plus onClick={addTarget} />
-          </div>
+          <Button
+            className="absolute right-4 cursor-pointer rounded-sm bg-transparent px-2 font-bold hover:bg-muted/30"
+            onClick={addTarget}
+          >
+            <Plus />
+          </Button>
         </div>
 
         <div className="bg-tableBody flex h-full flex-1 flex-col gap-2 p-4">
