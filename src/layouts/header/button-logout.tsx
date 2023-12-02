@@ -17,6 +17,7 @@ function ButtonLogout() {
   const handleLogout = () => {
     removeCookie('permission');
     removeCookie('token');
+
     navigate('/login');
   };
 

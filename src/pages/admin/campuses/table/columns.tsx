@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Campus } from '@/types';
 import { ColumnDef } from '@tanstack/react-table';
-
+import DeleteAccountDialog from '@/components/modal/modal-delete';
 export const campusColumns: ColumnDef<Campus>[] = [
   { accessorKey: 'name', header: 'Campus' },
   {
@@ -23,12 +23,14 @@ export const campusColumns: ColumnDef<Campus>[] = [
     cell: ({ row }) => {
       // const rowValue = row.original;
       // use row value to get row id
-
+      const handleDelete = () => {
+        console.log('clicked');
+      };
       return (
         <div className="flex flex-col justify-center">
           <div className="flex gap-2">
             <Button variant="edit">update</Button>
-            <Button variant={'destructive'}>delete</Button>
+            <DeleteAccountDialog onDelete={handleDelete} />
           </div>
         </div>
       );
