@@ -32,17 +32,18 @@ function ButtonLogout() {
         <DialogTitle>Confirm Logout</DialogTitle>
         <DialogDescription>Are you sure you want to logout?</DialogDescription>
         <DialogFooter>
+          <DialogClose asChild>
+            <Button type="button" className="w-24" variant="outline">
+              Cancel
+            </Button>
+          </DialogClose>
+
           <Button
-            className={`text-md bg-red-500 hover:bg-red-700`}
+            className={`text-md w-24 bg-red-500 hover:bg-red-700`}
             onClick={handleLogout}
           >
             Logout
           </Button>
-          <DialogClose asChild>
-            <Button type="button" variant="secondary">
-              Close
-            </Button>
-          </DialogClose>
         </DialogFooter>
       </DialogContent>
     </Dialog>
