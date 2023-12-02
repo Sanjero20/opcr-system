@@ -1,7 +1,5 @@
 import { useState } from 'react';
-
 import { Plus } from 'lucide-react';
-
 import {
   Dialog,
   DialogClose,
@@ -13,6 +11,7 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import FormAccount from '../form/form-account';
+import DeleteModal from '@/components/modal/modal-delete';
 
 function ButtonAccountAdd() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
