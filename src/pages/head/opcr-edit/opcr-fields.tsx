@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ToggleRating from '@/components/toggle-rating';
+import ToggleRating from '@/pages/head/opcr-edit/toggle-rating';
 import { Input } from '@/components/ui/input';
 import { useOpcr } from '@/stores/opcr-store';
 import { SuccessIndicator } from '@/types/opcr.types';
@@ -39,7 +39,11 @@ function InputFields({ targetIndex, data }: InputFieldsProps) {
             onChange={(e) => handleSuccessIndicator(e, targetIndex, index)}
           />
 
-          <ToggleRating />
+          <ToggleRating
+            rating={data[index].rating}
+            targetIndex={targetIndex}
+            successIndex={index}
+          />
 
           <Button
             className="w-full"

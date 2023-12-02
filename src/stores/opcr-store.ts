@@ -20,6 +20,12 @@ interface OpcrActions {
     targetIndex: number,
     successIndex: number,
   ) => void;
+
+  handleSuccessRating: (
+    value: number[],
+    targetIndex: number,
+    successIndex: number,
+  ) => void;
 }
 
 const initialSuccessIndicator: SuccessIndicator = {
@@ -114,6 +120,36 @@ export const useOpcr = create<OpcrStates & OpcrActions>((set, get) => ({
               return {
                 ...indicator,
                 [name]: value,
+              };
+            }
+            return indicator;
+          },
+        );
+
+        return {
+          ...target,
+          success: updatedSuccessIndicators,
+        };
+      }
+
+      return target;
+    });
+
+    set({ targets: updatedTargets });
+  },
+
+  // Ratings
+  handleSuccessRating: (value, targetIndex, successIndex) => {
+    const targets = get().targets;
+
+    const updatedTargets = targets.map((target, index) => {
+      if (index === targetIndex) {
+        const updatedSuccessIndicators = target.success.map(
+          (indicator, index) => {
+            if (index === successIndex) {
+              return {
+                ...indicator,
+                rating: value,
               };
             }
             return indicator;

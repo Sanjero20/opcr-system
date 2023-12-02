@@ -1,16 +1,33 @@
-import { useState } from 'react';
-import { ToggleGroup, ToggleGroupItem } from './ui/toggle-group';
+import { useEffect, useState } from 'react';
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
+import { useOpcr } from '@/stores/opcr-store';
 
 const values = ['q', 'e', 't', 'a'];
 
-function ToggleRating() {
-  const [rating, setRating] = useState([0, 0, 0, 0]);
+interface ToggleRatingProps {
+  targetIndex: number;
+  successIndex: number;
+  rating: number[];
+}
+
+function ToggleRating({
+  targetIndex,
+  successIndex,
+  rating,
+}: ToggleRatingProps) {
+  const { targets, handleSuccessRating } = useOpcr();
+
+  // const [indicatorRating, setIndicatorRating] = useState(rating)
 
   const handleRating = (index: number) => {
     const newRating = [...rating];
+    console.log(index, newRating);
     newRating[index] = newRating[index] === 0 ? 1 : 0;
-    setRating(newRating);
+    handleSuccessRating(newRating, targetIndex, successIndex);
   };
+
+  console.clear();
+  console.log(targets);
 
   return (
     <ToggleGroup
