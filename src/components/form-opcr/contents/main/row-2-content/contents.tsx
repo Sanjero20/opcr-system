@@ -19,28 +19,29 @@ function Contents() {
 
           return (
             <React.Fragment key={index}>
-              {success.map((success, index) => (
-                <tr className={styles.content} key={index}>
-                  {/* Major Final Output */}
-                  {index == 0 ? (
-                    <td rowSpan={target.success.length}>{name}</td>
-                  ) : null}
+              {success &&
+                success.map((success, index) => (
+                  <tr className={styles.content} key={index}>
+                    {/* Major Final Output */}
+                    {index == 0 ? (
+                      <td rowSpan={target.success.length}>{name}</td>
+                    ) : null}
 
-                  <SuccessIndicators data={success} />
+                    <SuccessIndicators data={success} />
 
-                  <Rating rating={target.success[index].rating} />
+                    <Rating rating={target.success[index].rating} />
 
-                  {/* Remarks */}
-                  <td>
-                    <textarea
-                      name=""
-                      id=""
-                      className="h-full resize-none"
-                      disabled
-                    />
-                  </td>
-                </tr>
-              ))}
+                    {/* Remarks */}
+                    <td>
+                      <textarea
+                        name=""
+                        id=""
+                        className="h-full resize-none"
+                        disabled
+                      />
+                    </td>
+                  </tr>
+                ))}
             </React.Fragment>
           );
         })}

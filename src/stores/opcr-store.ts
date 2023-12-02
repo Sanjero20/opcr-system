@@ -7,6 +7,8 @@ interface OpcrStates {
 }
 
 interface OpcrActions {
+  setTargets: (targets: Target[]) => void;
+
   addTarget: () => void;
   deleteTarget: (index: number) => void;
   handleTarget: (e: ChangeEvent<HTMLInputElement>, index: number) => void;
@@ -36,7 +38,11 @@ const initialTarget: Target = {
 };
 
 export const useOpcr = create<OpcrStates & OpcrActions>((set, get) => ({
-  targets: [initialTarget],
+  targets: [],
+
+  setTargets: (targets) => {
+    set({ targets });
+  },
 
   // Target
   addTarget: () => {
