@@ -5,7 +5,6 @@ import { Input } from '@/components/ui/input';
 import { X } from 'lucide-react';
 
 import { CampusFormType } from '../table/button-campus-add';
-import { Office } from '@/types';
 
 interface CampusFormProps {
   formData: CampusFormType;
@@ -36,10 +35,7 @@ function FormCampus({ formData, setFormData }: CampusFormProps) {
   const addOfficeInput = () => {
     setFormData({
       ...formData,
-      offices: [
-        ...formData.offices,
-        { _id: { $oid: '' }, name: '', head: '', opcr: [] },
-      ], // Add a new empty office input box
+      offices: [...formData.offices, { name: '' }], // Add a new empty office input box
     });
   };
 
@@ -64,7 +60,7 @@ function FormCampus({ formData, setFormData }: CampusFormProps) {
 
       <h2 className="">Offices:</h2>
 
-      {formData.offices.map((office: Office, index: number) => (
+      {formData.offices.map((office: any, index: number) => (
         <div key={index} className="relative flex items-center">
           <Input
             type="text"

@@ -17,15 +17,12 @@ import { useMutation } from '@tanstack/react-query';
 import { createCampus } from '@/services/admin';
 import { queryClient } from '@/App';
 
-import { Campus } from '@/types';
-
-export type CampusFormType = Omit<Campus, '_id'>;
-
-const initialFormData: CampusFormType = {
+const initialFormData = {
   name: '',
-  offices: [{ _id: { $oid: '' }, name: '', head: '', opcr: [] }],
-  pmt: [],
+  offices: [{ name: '' }],
 };
+
+export type CampusFormType = typeof initialFormData;
 
 function ButtonCampusAdd() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
