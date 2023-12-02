@@ -35,16 +35,16 @@ function DeleteAccountDialog({
       </DialogTrigger>
 
       <DialogContent>
-        <DialogTitle>Confirm Account Deletion</DialogTitle>
+        <DialogTitle>Confirm Deletion</DialogTitle>
         <DialogDescription>
-          Are you sure you want to delete this account?
+          Are you sure you want to delete this?
         </DialogDescription>
         <DialogFooter>
           <Button
             className={`text-md bg-red-500 hover:bg-red-700`}
             onClick={handleDelete}
           >
-            Delete Account
+            Delete
           </Button>
           <DialogClose asChild>
             <Button
