@@ -2,13 +2,12 @@ import TableOffices from './table/table-office';
 import { officeColumns } from './table/columns';
 
 import { useQuery } from '@tanstack/react-query';
+import { getOffices } from '@/services/pmt';
 
 function CampusOfficesPage() {
   const { data: pmtOffices, error } = useQuery({
-    queryKey: ['campuses'],
-    queryFn: () => {
-      return [];
-    },
+    queryKey: ['pmt-offices'],
+    queryFn: getOffices,
     initialData: [],
   });
 

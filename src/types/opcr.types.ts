@@ -19,3 +19,5 @@ export type SuccessIndicator = {
   rating: number[];
   remarks: string[];
 };
+
+export type OPCR_Status = 'in progress' | 'calibrated' | 'rejected';
