@@ -19,10 +19,6 @@ interface LoginFormProps {
 function LoginForm({ form, handleLogin }: LoginFormProps) {
   const [showPassword, setShowPassword] = useState(false);
 
-  useEffect(() => {
-    form.reset();
-  }, [form.formState.isValidating]);
-
   const toggleShow = () => {
     setShowPassword(!showPassword);
   };

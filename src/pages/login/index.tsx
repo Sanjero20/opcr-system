@@ -11,7 +11,6 @@ import {
   CardFooter,
   CardHeader,
 } from '@/components/ui/card';
-import { FormMessage } from '@/components/ui/form';
 
 import LoginForm from './form';
 
@@ -70,6 +69,10 @@ function LoginPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [permission, token]);
 
+  useEffect(() => {
+    if (error) setError('');
+  }, [form.formState.isValidating]);
+
   if (permission && token) {
     return;
   }
@@ -95,7 +98,7 @@ function LoginPage() {
             Sign In
           </Button>
 
-          {/* <FormMessage>{error}</FormMessage> */}
+          <span className="text-destructive">{error}</span>
         </CardFooter>
       </Card>
     </div>
