@@ -1,7 +1,9 @@
 import styles from './login.module.scss';
 
-import { FormEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -9,21 +11,30 @@ import {
   CardFooter,
   CardHeader,
 } from '@/components/ui/card';
+import { FormMessage } from '@/components/ui/form';
 
-import { Input } from '@/components/ui/input';
+import LoginForm from './form';
 
 import { loginAccount } from '@/services/authentication';
 import { getCookie, setCookie } from '@/lib/cookie';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { LoginFormType, loginFormSchema } from '@/types/form.schema';
 
 function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>('');
 
   const navigate = useNavigate();
 
   const permission = getCookie('permission');
   const token = getCookie('token');
+
+  const form = useForm<LoginFormType>({
+    resolver: zodResolver(loginFormSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
 
   const changeRoute = (permission: string) => {
     if (permission === 'admin') {
@@ -33,8 +44,9 @@ function LoginPage() {
     }
   };
 
-  const handleLogin = async (e: FormEvent) => {
-    e.preventDefault();
+  const handleLogin = async () => {
+    const values = form.getValues();
+    const { email, password } = values;
 
     const data = await loginAccount(email, password);
 
@@ -50,10 +62,7 @@ function LoginPage() {
     changeRoute(permission);
   };
 
-  useEffect(() => {
-    if (error) setError('');
-  }, [email, password]);
-
+  // Redirect user if they are already logged in
   useEffect(() => {
     if (permission && token) {
       changeRoute(permission);
@@ -78,25 +87,7 @@ function LoginPage() {
         </CardHeader>
 
         <CardContent>
-          <form
-            onSubmit={(e) => handleLogin(e)}
-            id="login-form"
-            className="flex flex-col gap-2"
-          >
-            <Input
-              type="text"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Email"
-            />
-
-            <Input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password"
-            />
-          </form>
+          <LoginForm form={form} handleLogin={handleLogin} />
         </CardContent>
 
         <CardFooter className="flex flex-col justify-center gap-2">
@@ -104,7 +95,7 @@ function LoginPage() {
             Sign In
           </Button>
 
-          {error && <p className="text-destructive">*{error}*</p>}
+          {/* <FormMessage>{error}</FormMessage> */}
         </CardFooter>
       </Card>
     </div>

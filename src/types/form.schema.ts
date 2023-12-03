@@ -1,5 +1,12 @@
 import * as z from 'zod';
 
+export const loginFormSchema = z.object({
+  email: z.string().email({ message: 'Must be a valid email address' }),
+  password: z.string().min(1, { message: 'This field is required' }),
+});
+
+export type LoginFormType = z.infer<typeof loginFormSchema>;
+
 export const accountFormSchema = z
   .object({
     username: z
