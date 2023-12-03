@@ -13,10 +13,17 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
-// import SelectAccountType from './toggle-account-type';
+import { useToast } from '@/components/ui/use-toast';
 
 import { useMutation } from '@tanstack/react-query';
 import { queryClient } from '@/App';
+
+import SelectAccountType from './select/select-account-type';
+import SelectCampus from './select/select-campus';
+import SelectOffice from './select/select-office';
+import SelectSuperior from './select/select-superior';
+
+import { AccountFormType, accountFormSchema } from '@/types/form.schema';
 
 import {
   assignHeadToOffice,
@@ -24,14 +31,6 @@ import {
   createAccount,
 } from '@/services/admin';
 
-import { AccountFormType, accountFormSchema } from '@/types/form.schema';
-import SelectAccountType from './select/select-account-type';
-
-import SelectCampus from './select/select-campus';
-import SelectOffice from './select/select-office';
-import SelectSuperior from './select/select-superior';
-import { Toaster } from '@/components/ui/toaster';
-import { useToast } from '@/components/ui/use-toast';
 const initialAccountData: AccountFormType = {
   name: '',
   username: '',
