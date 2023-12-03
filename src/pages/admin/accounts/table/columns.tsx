@@ -22,7 +22,7 @@ export const columnsAccount: ColumnDef<Account>[] = [
       const handleDelete = useMutation({
         mutationFn: () => deleteAccount(_id.$oid),
         onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: ['campuses'] });
+          queryClient.invalidateQueries({ queryKey: ['accounts'] });
           setModalIsOpen(false);
         },
       });
