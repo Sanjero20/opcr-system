@@ -71,7 +71,7 @@ function LoginForm({ form, handleLogin }: LoginFormProps) {
                     onClick={toggleShow}
                     tabIndex={-1}
                   >
-                    {showPassword ? <Eye size={18} /> : <EyeOff size={18} />}
+                    {!showPassword ? <Eye size={18} /> : <EyeOff size={18} />}
                   </Button>
                 </div>
               </FormControl>
