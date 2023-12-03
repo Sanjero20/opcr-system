@@ -30,7 +30,8 @@ import SelectAccountType from './select/select-account-type';
 import SelectCampus from './select/select-campus';
 import SelectOffice from './select/select-office';
 import SelectSuperior from './select/select-superior';
-
+import { Toaster } from '@/components/ui/toaster';
+import { useToast } from '@/components/ui/use-toast';
 const initialAccountData: AccountFormType = {
   name: '',
   username: '',
@@ -49,7 +50,7 @@ interface AccountFormProps {
 function FormAccount({ closeModal }: AccountFormProps) {
   const [errorMsg, setErrorMsg] = useState('');
   const [accountType, setAccountType] = useState(initialAccountData.permission);
-
+  const { toast } = useToast();
   // Optional variables for pmt & head
   const [selectedCampus, setSelectedCampus] = useState('');
   const [selectedOffice, setSelectedOffice] = useState('');
@@ -73,7 +74,9 @@ function FormAccount({ closeModal }: AccountFormProps) {
           selectedOffice,
         );
       }
-
+      toast({
+        title: 'Account Successfully Added!',
+      });
       queryClient.invalidateQueries({ queryKey: ['accounts'] });
       closeModal();
       form.reset();
