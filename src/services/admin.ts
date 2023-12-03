@@ -59,6 +59,15 @@ export async function getCampusList(): Promise<Campus[]> {
   }
 }
 
+export async function deleteCampus(id: string) {
+  try {
+    const response = await api.delete(adminURL + `/delete/campus/${id}`);
+    return await response.data;
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+}
+
 export async function getOfficesByCampusId(
   campusId: string,
 ): Promise<Office[]> {
