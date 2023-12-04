@@ -24,4 +24,8 @@ export type SuccessIndicator = {
   remarks: string[];
 };
 
-export type OPCR_Status = 'in progress' | 'calibrated' | 'rejected';
+export type OPCR_Status =
+  | 'in progress'
+  | 'calibrated'
+  | 'calibrating'
+  | 'rejected';
