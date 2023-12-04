@@ -1,7 +1,9 @@
 export type OPCR = {
   _id: { $oid: string };
   accepted: boolean;
+  archived: boolean;
   owner: string;
+  status: OPCR_Status;
   targets: Target[];
 };
 
@@ -12,6 +14,7 @@ export type Target = {
 };
 
 export type SuccessIndicator = {
+  _id?: { $oid: string };
   accomplishment: string;
   assigned_to: string[];
   budget: number;

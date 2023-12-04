@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useOpcr, initialSuccessIndicator } from '@/stores/opcr-store';
-import { SuccessIndicator, Target } from '@/types/opcr.types';
+import { Target } from '@/types/opcr.types';
 
 function useSelectedTarget(targetId: string | undefined) {
   const [target, setTarget] = useState<Target>();

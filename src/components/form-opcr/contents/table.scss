@@ -2,8 +2,13 @@
   width: 100%;
 
   * {
-    font-family: 'Times New Roman', Times, serif !important;
+    font-family: 'Times New Roman', Times, serif;
     font-size: 12px;
+  }
+
+  button {
+    font-family: poppins;
+    // font-size: 0.7rem;
   }
 
   td,

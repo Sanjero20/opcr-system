@@ -1,7 +1,6 @@
 import { cn } from '@/lib/utils';
 import { PMT_Office } from '@/types';
 import { ColumnDef } from '@tanstack/react-table';
-import { number } from 'zod';
 
 export const officeColumns: ColumnDef<PMT_Office>[] = [
   { accessorKey: 'name', header: 'Office' },
@@ -12,9 +11,10 @@ export const officeColumns: ColumnDef<PMT_Office>[] = [
       const { status } = row.original;
 
       let styles = cn(
-        status === 'calibrated' && 'text-green-400',
-        status === 'in progress' && 'text-yellow-400',
         status === 'rejected' && 'text-red-400',
+        status === 'in progress' && 'text-yellow-400',
+        status === 'calibrating' && 'text-green-400',
+        status === 'calibrated' && 'text-green-700',
         'capitalize font-bold',
       );
 

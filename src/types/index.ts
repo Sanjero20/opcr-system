@@ -34,6 +34,6 @@ export type AccountCreated = {
 export type PMT_Office = {
   _id: { $oid: string };
   name: string;
-  status: 'calibrated' | 'in progress' | 'rejected';
+  status: 'calibrated' | 'in progress' | 'rejected' | 'calibrating';
   progress: number;
 };

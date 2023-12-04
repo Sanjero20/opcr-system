@@ -1,13 +1,16 @@
 import React from 'react';
-import styles from './contents.module.scss';
 
 import SuccessIndicators from './success-indicators';
 import Rating from './rating';
 
 import { useOpcr } from '@/stores/opcr-store';
+import { getCookie } from '@/lib/cookie';
+import { Permission } from '@/types';
+import EditableTextArea from './textarea-remarks';
 
 function Contents() {
   const { targets } = useOpcr();
+  const permission = getCookie('permission') as Permission;
 
   return (
     <tbody>
@@ -19,7 +22,7 @@ function Contents() {
             <React.Fragment key={index}>
               {success &&
                 success.map((success, index) => (
-                  <tr className={styles.content} key={index}>
+                  <tr key={index}>
                     {/* Major Final Output */}
                     {index == 0 ? (
                       <td rowSpan={target.success.length}>{name}</td>
@@ -31,12 +34,15 @@ function Contents() {
 
                     {/* Remarks */}
                     <td>
-                      <textarea
-                        name=""
-                        id=""
-                        className="h-full resize-none"
-                        disabled
-                      />
+                      {permission === 'pmt' && success._id ? (
+                        <EditableTextArea />
+                      ) : (
+                        <ul className="h-100" style={{ minHeight: 50 }}>
+                          {target.success[index].remarks.map((value, index) => (
+                            <li key={index}>{value}</li>
+                          ))}
+                        </ul>
+                      )}
                     </td>
                   </tr>
                 ))}
