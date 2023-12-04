@@ -10,3 +10,13 @@ export async function getOffices(): Promise<PMT_Office[]> {
     throw new Error(error);
   }
 }
+
+export async function getOPCRbyId(id: string) {
+  try {
+    const response = await api.get('/pmt/get/opcr/' + id);
+    const opcr = await response.data;
+    return opcr.data;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+}

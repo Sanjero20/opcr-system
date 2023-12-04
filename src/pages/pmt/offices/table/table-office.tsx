@@ -42,7 +42,7 @@ function TableOffices<TData, TValue>({
         {/* <ButtonCampusAdd /> */}
       </div>
 
-      <TableData table={table} columns={columns} />
+      <TableData table={table} columns={columns} rowClickable />
     </div>
   );
 }

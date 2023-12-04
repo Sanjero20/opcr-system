@@ -1,7 +1,7 @@
-import { SuccessIndicator, Target } from '@/types/opcr.types';
 import { ChangeEvent } from 'react';
-import { v4 as uuid } from 'uuid';
 import { create } from 'zustand';
+import { v4 as uuid } from 'uuid';
+import { SuccessIndicator, Target } from '@/types/opcr.types';
 
 interface OpcrStates {
   targets: Target[];
@@ -15,6 +15,8 @@ interface OpcrActions {
   handleTarget: (e: ChangeEvent<HTMLInputElement>, targetId: string) => void;
 
   updateTargetDetails: (data: Target) => void;
+
+  resetOPCR: () => void;
 }
 
 export const initialSuccessIndicator: SuccessIndicator = {
@@ -39,12 +41,9 @@ export const useOpcr = create<OpcrStates & OpcrActions>((set, get) => ({
   targets: [],
 
   setTargets: (targets) => {
-    console.log('trigger', targets);
-
     set({ targets });
   },
 
-  // Target
   addTarget: () => {
     const latestTargets = get().targets;
     set({ targets: [...latestTargets, initialTarget()] });
@@ -78,5 +77,9 @@ export const useOpcr = create<OpcrStates & OpcrActions>((set, get) => ({
       target._id.$oid === targetId ? targetData : target,
     );
     set({ targets: updatedTargets });
+  },
+
+  resetOPCR: () => {
+    set({ targets: [] });
   },
 }));

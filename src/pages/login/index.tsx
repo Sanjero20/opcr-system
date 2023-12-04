@@ -18,11 +18,13 @@ import { loginAccount } from '@/services/authentication';
 import { getCookie, setCookie } from '@/lib/cookie';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { LoginFormType, loginFormSchema } from '@/types/form.schema';
+import { useOpcr } from '@/stores/opcr-store';
 
 function LoginPage() {
   const [error, setError] = useState<string | null>('');
 
   const navigate = useNavigate();
+  const { resetOPCR } = useOpcr();
 
   const permission = getCookie('permission');
   const token = getCookie('token');
@@ -72,6 +74,11 @@ function LoginPage() {
   useEffect(() => {
     if (error) setError('');
   }, [form.formState.isValidating]);
+
+  // Clear OPCR Store
+  useEffect(() => {
+    resetOPCR();
+  }, []);
 
   if (permission && token) {
     return;

@@ -1,4 +1,5 @@
 import CampusOfficesPage from '@/pages/pmt/offices';
+import ViewOfficeOPCR from '@/pages/pmt/offices/view-office-opcr';
 
 export const pmtRoutes = [
   {
@@ -6,7 +7,7 @@ export const pmtRoutes = [
     element: <CampusOfficesPage />,
   },
   {
-    path: '/offices/:opcrId',
-    element: <>Display opcr form of a office</>,
+    path: '/offices/:id',
+    element: <ViewOfficeOPCR />,
   },
 ];
