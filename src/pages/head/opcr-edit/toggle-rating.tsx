@@ -4,22 +4,20 @@ import { useOpcr } from '@/stores/opcr-store';
 const values = ['q', 'e', 't', 'a'];
 
 interface ToggleRatingProps {
-  targetIndex: number;
   successIndex: number;
   rating: number[];
+  handleSuccessRating: (rating: number[], index: number) => void;
 }
 
 function ToggleRating({
-  targetIndex,
-  successIndex,
   rating,
+  successIndex,
+  handleSuccessRating,
 }: ToggleRatingProps) {
-  const { handleSuccessRating } = useOpcr();
-
   const handleRating = (index: number) => {
     const newRating = [...rating];
     newRating[index] = newRating[index] === 0 ? 1 : 0;
-    handleSuccessRating(newRating, targetIndex, successIndex);
+    handleSuccessRating(newRating, successIndex);
   };
 
   return (

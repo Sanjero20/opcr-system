@@ -9,8 +9,6 @@ import { useOpcr } from '@/stores/opcr-store';
 function Contents() {
   const { targets } = useOpcr();
 
-  console.log(targets);
-
   return (
     <tbody>
       {targets &&

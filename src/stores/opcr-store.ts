@@ -1,5 +1,6 @@
 import { SuccessIndicator, Target } from '@/types/opcr.types';
 import { ChangeEvent } from 'react';
+import { v4 as uuid } from 'uuid';
 import { create } from 'zustand';
 
 interface OpcrStates {
@@ -10,25 +11,13 @@ interface OpcrActions {
   setTargets: (targets: Target[]) => void;
 
   addTarget: () => void;
-  deleteTarget: (index: number) => void;
-  handleTarget: (e: ChangeEvent<HTMLInputElement>, index: number) => void;
+  deleteTarget: (targetId: string) => void;
+  handleTarget: (e: ChangeEvent<HTMLInputElement>, targetId: string) => void;
 
-  addSuccessIndicator: (targetIndex: number) => void;
-  deleteSuccessIndicator: (targetIndex: number, successIndex: number) => void;
-  handleSuccessIndicator: (
-    e: ChangeEvent<HTMLInputElement>,
-    targetIndex: number,
-    successIndex: number,
-  ) => void;
-
-  handleSuccessRating: (
-    value: number[],
-    targetIndex: number,
-    successIndex: number,
-  ) => void;
+  updateTargetDetails: (data: Target) => void;
 }
 
-const initialSuccessIndicator: SuccessIndicator = {
+export const initialSuccessIndicator: SuccessIndicator = {
   accomplishment: '',
   assigned_to: [''],
   budget: 0,
@@ -38,9 +27,12 @@ const initialSuccessIndicator: SuccessIndicator = {
   remarks: [''],
 };
 
-const initialTarget: Target = {
-  name: '',
-  success: [initialSuccessIndicator],
+const initialTarget = (): Target => {
+  return {
+    id: { $oid: uuid() },
+    name: '',
+    success: [initialSuccessIndicator],
+  };
 };
 
 export const useOpcr = create<OpcrStates & OpcrActions>((set, get) => ({
@@ -53,118 +45,36 @@ export const useOpcr = create<OpcrStates & OpcrActions>((set, get) => ({
   // Target
   addTarget: () => {
     const latestTargets = get().targets;
-    set({ targets: [...latestTargets, initialTarget] });
+    set({ targets: [...latestTargets, initialTarget()] });
   },
 
-  deleteTarget: (index) => {
-    const latestTargets = get().targets;
-    latestTargets.splice(index, 1);
+  deleteTarget: (targetId) => {
+    const targets = get().targets;
+    const latestTargets = targets.filter(
+      (target) => target.id.$oid !== targetId,
+    );
+
     set({ targets: latestTargets });
   },
 
-  handleTarget: (e, targetIndex) => {
+  handleTarget: (e, targetId) => {
     const value = e.target.value;
 
     const latestTargets = get().targets;
-    const updatedTargets = latestTargets.map((target, index) => {
-      return index === targetIndex ? { ...target, name: value } : target;
+    const updatedTargets = latestTargets.map((target) => {
+      return target.id.$oid === targetId ? { ...target, name: value } : target;
     });
 
     set({ targets: updatedTargets });
   },
 
-  // Sucess
-  addSuccessIndicator: (targetIndex) => {
+  updateTargetDetails: (targetData) => {
+    const targetId = targetData.id.$oid;
     const targets = get().targets;
 
-    const updatedTargets = targets.map((target, index) => {
-      return index === targetIndex
-        ? { ...target, success: [...target.success, initialSuccessIndicator] }
-        : target;
-    });
-
-    set({ targets: updatedTargets });
-  },
-
-  deleteSuccessIndicator: (targetIndex, successIndex) => {
-    const targets = get().targets;
-
-    const updatedTargets = targets.map((target, index) => {
-      if (index === targetIndex) {
-        const updatedSuccessIndicators = target.success.filter(
-          (val, index) => index !== successIndex,
-        );
-
-        return {
-          ...target,
-          success: updatedSuccessIndicators,
-        };
-      }
-
-      return target;
-    });
-
-    set({ targets: updatedTargets });
-  },
-
-  handleSuccessIndicator: (e, targetIndex, indicatorIndex) => {
-    const { name, value } = e.target;
-
-    const targets = get().targets;
-
-    const updatedTargets = targets.map((target, index) => {
-      if (index === targetIndex) {
-        const updatedSuccessIndicators = target.success.map(
-          (indicator, index) => {
-            if (index === indicatorIndex) {
-              return {
-                ...indicator,
-                [name]: value,
-              };
-            }
-            return indicator;
-          },
-        );
-
-        return {
-          ...target,
-          success: updatedSuccessIndicators,
-        };
-      }
-
-      return target;
-    });
-
-    set({ targets: updatedTargets });
-  },
-
-  // Ratings
-  handleSuccessRating: (value, targetIndex, successIndex) => {
-    const targets = get().targets;
-
-    const updatedTargets = targets.map((target, index) => {
-      if (index === targetIndex) {
-        const updatedSuccessIndicators = target.success.map(
-          (indicator, index) => {
-            if (index === successIndex) {
-              return {
-                ...indicator,
-                rating: value,
-              };
-            }
-            return indicator;
-          },
-        );
-
-        return {
-          ...target,
-          success: updatedSuccessIndicators,
-        };
-      }
-
-      return target;
-    });
-
+    const updatedTargets = targets.map((target) =>
+      target.id.$oid === targetId ? targetData : target,
+    );
     set({ targets: updatedTargets });
   },
 }));

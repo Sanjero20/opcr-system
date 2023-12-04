@@ -6,6 +6,7 @@ export type OPCR = {
 };
 
 export type Target = {
+  id: { $oid: string };
   name: string;
   success: SuccessIndicator[];
 };

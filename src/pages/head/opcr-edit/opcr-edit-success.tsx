@@ -1,27 +1,31 @@
-import { useMemo } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import InputFields from './opcr-fields';
-import ButtonControl from './button-control';
 
+import useSelectedTarget from '@/hooks/use-selected-target';
 import { useOpcr } from '@/stores/opcr-store';
 
 function OpcrEditSuccessIndicator() {
-  const { targets, handleTarget } = useOpcr();
-  const { addSuccessIndicator } = useOpcr();
-
   const params = useParams();
+  const navigate = useNavigate();
 
-  const targetIndex = useMemo(() => Number(params.id), [params]);
+  const {
+    target,
+    handleTargetName,
+    handleSuccessIndicator,
+    addSuccessIndicator,
+    deleteSuccessIndicator,
+    handleSuccessRating,
+  } = useSelectedTarget(params.id);
 
-  if (
-    (!targetIndex && targetIndex !== 0) ||
-    targetIndex < 0 ||
-    targetIndex > targets.length - 1
-  )
-    return <>Invalid target ID</>;
+  const { updateTargetDetails } = useOpcr();
+
+  if (!target) return <>This MFO does not exist</>;
+
+  console.clear();
+  console.log(target);
 
   return (
     <div className="flex h-full flex-col gap-2">
@@ -30,13 +34,13 @@ function OpcrEditSuccessIndicator() {
       <section className="bg-tableBody flex flex-1 flex-col gap-2 p-4">
         <div className="flex justify-between rounded-t font-bold text-black/70">
           <p>Major Final Output/ Projects / Programs List</p>
-          <p>MFO no. {Number(params.id) + 1}</p>
+          <p>MFO no. {}</p>
         </div>
 
         <Input
           placeholder=""
-          value={targets[Number(params.id)].name}
-          onChange={(e) => handleTarget(e, Number(params.id))}
+          value={target.name}
+          onChange={(e) => handleTargetName(e)}
         />
 
         <div className="grid grid-cols-12 gap-2 font-bold text-black/70">
@@ -49,21 +53,43 @@ function OpcrEditSuccessIndicator() {
           {/* Columns End */}
 
           <InputFields
-            targetIndex={targetIndex}
-            data={targets[targetIndex].success}
+            sucessIndicators={target.success}
+            handleIndicator={handleSuccessIndicator}
+            handleDeleteIndicator={deleteSuccessIndicator}
+            handleSuccessRating={handleSuccessRating}
           />
         </div>
 
         <Button
           className="w-24 self-center"
           variant={'add'}
-          onClick={() => addSuccessIndicator(Number(params.id))}
+          onClick={addSuccessIndicator}
         >
           Add
         </Button>
       </section>
 
-      <ButtonControl route="/opcr/edit" />
+      {/* Button Navigation */}
+      <section className="flex justify-end gap-2">
+        <Button
+          className="w-24"
+          variant={'outline'}
+          onClick={() => navigate('/opcr/edit')}
+        >
+          Cancel
+        </Button>
+
+        <Button
+          className="w-24"
+          variant={'edit'}
+          onClick={() => {
+            updateTargetDetails(target);
+            navigate('/opcr/edit');
+          }}
+        >
+          Update
+        </Button>
+      </section>
     </div>
   );
 }
