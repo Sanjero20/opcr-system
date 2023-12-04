@@ -11,7 +11,7 @@ export async function getOPCR(): Promise<Target[]> {
   }
 }
 
-export async function udpateMFODetails(target: Target) {
+export async function updateMFODetails(target: Target) {
   try {
     const response = await api.post('/head/add/mfo', target);
     console.log(response);
