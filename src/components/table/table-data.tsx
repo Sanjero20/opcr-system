@@ -20,16 +20,26 @@ import {
 } from '@/components/ui/table';
 
 import TablePagination from '@/components/table/table-pagination';
+import { useNavigate } from 'react-router-dom';
+import { cn } from '@/lib/utils';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   table: any;
+  rowClickable?: boolean;
 }
 
 export function TableData<TData, TValue>({
   columns,
   table,
+  rowClickable = false,
 }: DataTableProps<TData, TValue>) {
+  const navigate = useNavigate();
+
+  const changeRoute = (id: string) => {
+    navigate('./' + id);
+  };
+
   return (
     <>
       {/* Table */}
@@ -64,7 +74,13 @@ export function TableData<TData, TValue>({
                   {row.getVisibleCells().map((cell: any) => (
                     <TableCell
                       key={cell.id}
-                      className="[&:first-child]:w-1/5 [&:last-child]:w-1/6"
+                      className={cn(
+                        rowClickable && 'cursor-pointer',
+                        '[&:first-child]:w-1/5 [&:last-child]:w-1/6',
+                      )}
+                      onClick={() =>
+                        rowClickable && changeRoute(row.original._id.$oid)
+                      }
                     >
                       {flexRender(
                         cell.column.columnDef.cell,
