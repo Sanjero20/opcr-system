@@ -25,9 +25,6 @@ function OpcrEditSuccessIndicator() {
 
   if (!target) return <>This MFO does not exist</>;
 
-  console.clear();
-  console.log(target);
-
   return (
     <div className="flex h-full flex-col gap-2">
       <h1 className="title">OPCR FORM EDIT</h1>

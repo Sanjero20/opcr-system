@@ -29,7 +29,7 @@ export const initialSuccessIndicator: SuccessIndicator = {
 
 const initialTarget = (): Target => {
   return {
-    id: { $oid: uuid() },
+    _id: { $oid: uuid() },
     name: '',
     success: [initialSuccessIndicator],
   };
@@ -53,7 +53,7 @@ export const useOpcr = create<OpcrStates & OpcrActions>((set, get) => ({
   deleteTarget: (targetId) => {
     const targets = get().targets;
     const latestTargets = targets.filter(
-      (target) => target.id.$oid !== targetId,
+      (target) => target._id.$oid !== targetId,
     );
 
     set({ targets: latestTargets });
@@ -64,18 +64,18 @@ export const useOpcr = create<OpcrStates & OpcrActions>((set, get) => ({
 
     const latestTargets = get().targets;
     const updatedTargets = latestTargets.map((target) => {
-      return target.id.$oid === targetId ? { ...target, name: value } : target;
+      return target._id.$oid === targetId ? { ...target, name: value } : target;
     });
 
     set({ targets: updatedTargets });
   },
 
   updateTargetDetails: (targetData) => {
-    const targetId = targetData.id.$oid;
+    const targetId = targetData._id.$oid;
     const targets = get().targets;
 
     const updatedTargets = targets.map((target) =>
-      target.id.$oid === targetId ? targetData : target,
+      target._id.$oid === targetId ? targetData : target,
     );
     set({ targets: updatedTargets });
   },

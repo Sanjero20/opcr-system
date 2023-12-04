@@ -25,10 +25,9 @@ function OpcrEditPage() {
 
   useEffect(() => {
     if (opcr) {
-      console.log(opcr);
       setTargets(opcr);
     }
-  }, [opcr, setTargets]);
+  }, [opcr]);
 
   return (
     <div className="flex h-full flex-col gap-2">
@@ -55,14 +54,14 @@ function OpcrEditPage() {
                 <Input
                   placeholder=""
                   value={target.name}
-                  onChange={(e) => handleTarget(e, target.id.$oid)}
+                  onChange={(e) => handleTarget(e, target._id.$oid)}
                 />
 
                 <div className="flex gap-2">
                   <Button
                     className="w-24"
                     variant={'edit'}
-                    onClick={() => navigate(`./${target.id.$oid}`)}
+                    onClick={() => navigate(`./${target._id.$oid}`)}
                   >
                     Edit
                   </Button>
@@ -70,7 +69,7 @@ function OpcrEditPage() {
                   <Button
                     className="w-24"
                     variant={'destructive'}
-                    onClick={() => deleteTarget(target.id.$oid)}
+                    onClick={() => deleteTarget(target._id.$oid)}
                   >
                     Delete
                   </Button>

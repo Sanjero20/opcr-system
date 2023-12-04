@@ -9,7 +9,7 @@ function useSelectedTarget(targetId: string | undefined) {
   // Get the matching target based on the id
   useEffect(() => {
     if (!targetId) return;
-    const target = targets.filter((target) => target.id.$oid === targetId)[0];
+    const target = targets.filter((target) => target._id.$oid === targetId)[0];
     setTarget(target);
   }, [targetId]);
 
