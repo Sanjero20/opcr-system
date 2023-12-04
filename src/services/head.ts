@@ -29,3 +29,13 @@ export async function saveOPCR(opcrData: Target[]) {
     throw new Error(error);
   }
 }
+
+export async function submitOPCR() {
+  try {
+    const response = await api.get('/head/submit/opcr');
+    const opcrDetails = await response.data;
+    return opcrDetails;
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+}
