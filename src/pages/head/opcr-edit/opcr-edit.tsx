@@ -9,7 +9,7 @@ import { Input } from '@/components/ui/input';
 import OpcrEditHeader from './opcr-edit-header';
 
 import { useNavigate } from 'react-router-dom';
-import { getOPCR } from '@/services/head';
+import { getOPCR, saveOPCR } from '@/services/head';
 
 function OpcrEditPage() {
   const { targets, setTargets, addTarget, deleteTarget, handleTarget } =
@@ -24,13 +24,11 @@ function OpcrEditPage() {
   });
 
   useEffect(() => {
-    if (!opcr) return;
-    setTargets(opcr.targets);
-  }, [opcr]);
-
-  console.clear();
-  console.log(opcr);
-  console.log(targets);
+    if (opcr) {
+      console.log(opcr);
+      setTargets(opcr);
+    }
+  }, [opcr, setTargets]);
 
   return (
     <div className="flex h-full flex-col gap-2">
@@ -95,6 +93,7 @@ function OpcrEditPage() {
           className="w-24"
           variant={'add'}
           onClick={() => {
+            saveOPCR(targets);
             navigate('/opcr');
           }}
         >

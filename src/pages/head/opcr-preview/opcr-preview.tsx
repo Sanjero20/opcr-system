@@ -19,8 +19,9 @@ function OpcrPreviewPage() {
   });
 
   useEffect(() => {
-    if (!opcr) return;
-    setTargets(opcr.targets);
+    if (opcr) {
+      setTargets(opcr);
+    }
   }, [opcr]);
 
   return (

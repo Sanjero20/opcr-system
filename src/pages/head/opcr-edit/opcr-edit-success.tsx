@@ -6,6 +6,7 @@ import InputFields from './opcr-fields';
 
 import useSelectedTarget from '@/hooks/use-selected-target';
 import { useOpcr } from '@/stores/opcr-store';
+import { udpateMFODetails } from '@/services/head';
 
 function OpcrEditSuccessIndicator() {
   const params = useParams();
@@ -83,6 +84,7 @@ function OpcrEditSuccessIndicator() {
           className="w-24"
           variant={'edit'}
           onClick={() => {
+            udpateMFODetails(target);
             updateTargetDetails(target);
             navigate('/opcr/edit');
           }}

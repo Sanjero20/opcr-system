@@ -1,7 +1,7 @@
 import { api } from '.';
-import { OPCR, Target } from '@/types/opcr.types';
+import { Target } from '@/types/opcr.types';
 
-export async function getOPCR(): Promise<OPCR> {
+export async function getOPCR(): Promise<Target[]> {
   try {
     const response = await api.get('/head/opcr');
     const opcr = await response.data;
@@ -11,17 +11,19 @@ export async function getOPCR(): Promise<OPCR> {
   }
 }
 
-export async function saveMFODetails(id: string) {
+export async function udpateMFODetails(target: Target) {
   try {
-    const response = await api.post('');
+    const response = await api.post('/head/add/mfo', target);
+    console.log(response);
+    return await response.data;
   } catch (error: any) {
     throw new Error(error.message);
   }
 }
 
-export async function createOpcr(opcrData: Target[]) {
+export async function saveOPCR(opcrData: Target[]) {
   try {
-    const response = await api.post('/head/add/mfo', opcrData);
+    const response = await api.post('/head/add/bulk/mfo', opcrData);
     return await response.data;
   } catch (error: any) {
     throw new Error(error);

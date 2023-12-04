@@ -39,6 +39,8 @@ export const useOpcr = create<OpcrStates & OpcrActions>((set, get) => ({
   targets: [],
 
   setTargets: (targets) => {
+    console.log('trigger', targets);
+
     set({ targets });
   },
 

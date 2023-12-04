@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { useOpcr } from '@/stores/opcr-store';
-import { createOpcr } from '@/services/head';
 
 function ButtonControl() {
   const { targets } = useOpcr();
@@ -13,7 +12,7 @@ function ButtonControl() {
       <Button
         className="w-24"
         variant={'add'}
-        onClick={() => createOpcr(targets)}
+        // onClick={() => createOpcr(targets)}
       >
         Submit
       </Button>
