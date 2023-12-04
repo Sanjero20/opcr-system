@@ -12,7 +12,7 @@ function NavLink({ href, children }: NavLinkProps) {
 
   const styles = twMerge(
     pathname === href ||
-      (pathname.startsWith('/opcr') && href.startsWith('/opcr'))
+      (pathname.startsWith(href) && href !== '/' && href !== '/admin')
       ? 'bg-white text-primary hover:text-white hover:bg-white hover:text-primary'
       : 'bg-transparent hover:bg-transparent',
     'text-md w-32 rounded-xl py-0',
