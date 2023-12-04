@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { queryClient } from '@/App';
 import { deleteAccount } from '@/services/admin';
+import { useToast } from '@/components/ui/use-toast';
 
 export const columnsAccount: ColumnDef<Account>[] = [
   { accessorKey: 'name', header: 'Name' },
@@ -18,12 +19,17 @@ export const columnsAccount: ColumnDef<Account>[] = [
       const { _id } = row.original;
 
       const [isOpen, setModalIsOpen] = useState(false);
+      const { toast } = useToast();
 
       const handleDelete = useMutation({
         mutationFn: () => deleteAccount(_id.$oid),
         onSuccess: () => {
           queryClient.invalidateQueries({ queryKey: ['accounts'] });
           setModalIsOpen(false);
+
+          toast({
+            title: 'Account Successfully Deleted',
+          });
         },
       });
 

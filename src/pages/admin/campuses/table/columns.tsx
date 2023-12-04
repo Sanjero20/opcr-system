@@ -6,6 +6,8 @@ import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { queryClient } from '@/App';
 import { deleteCampus } from '@/services/admin';
+import { useToast } from '@/components/ui/use-toast';
+
 export const campusColumns: ColumnDef<Campus>[] = [
   { accessorKey: 'name', header: 'Campus' },
   {
@@ -28,12 +30,16 @@ export const campusColumns: ColumnDef<Campus>[] = [
       const { _id } = row.original;
 
       const [isOpen, setModalIsOpen] = useState(false);
-
+      const { toast } = useToast();
       const handleDelete = useMutation({
         mutationFn: () => deleteCampus(_id.$oid),
         onSuccess: () => {
           queryClient.invalidateQueries({ queryKey: ['campuses'] });
           setModalIsOpen(false);
+
+          toast({
+            title: 'Campus Successfully Deleted',
+          });
         },
       });
 
