@@ -1,13 +1,15 @@
 import { ChangeEvent } from 'react';
 import { create } from 'zustand';
 import { v4 as uuid } from 'uuid';
-import { SuccessIndicator, Target } from '@/types/opcr.types';
+import { OPCR_Status, SuccessIndicator, Target } from '@/types/opcr.types';
 
 interface OpcrStates {
+  status: OPCR_Status;
   targets: Target[];
 }
 
 interface OpcrActions {
+  setStatus: (status: OPCR_Status) => void;
   setTargets: (targets: Target[]) => void;
 
   addTarget: () => void;
@@ -38,7 +40,12 @@ const initialTarget = (): Target => {
 };
 
 export const useOpcr = create<OpcrStates & OpcrActions>((set, get) => ({
+  status: 'calibrating',
   targets: [],
+
+  setStatus: (status) => {
+    set({ status });
+  },
 
   setTargets: (targets) => {
     set({ targets });

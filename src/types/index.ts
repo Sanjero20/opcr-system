@@ -1,3 +1,5 @@
+import { OPCR, OPCR_Status, Target } from './opcr.types';
+
 export type Permission = 'admin' | 'head' | 'individual' | 'pmt';
 
 export type Account = {
@@ -34,6 +36,12 @@ export type AccountCreated = {
 export type PMT_Office = {
   _id: { $oid: string };
   name: string;
-  status: 'calibrated' | 'in progress' | 'rejected' | 'calibrating';
+  status: OPCR_Status;
   progress: number;
+};
+
+export type OPCR_Response = {
+  data: Target[];
+  error: any;
+  status: OPCR_Status;
 };

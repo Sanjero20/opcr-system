@@ -10,7 +10,7 @@ import { useOpcr } from '@/stores/opcr-store';
 import { useQuery } from '@tanstack/react-query';
 
 function OpcrPreviewPage() {
-  const { setTargets } = useOpcr();
+  const { status, setStatus, setTargets } = useOpcr();
 
   const { data: opcr, error } = useQuery({
     queryKey: ['opcr-data'],
@@ -20,15 +20,22 @@ function OpcrPreviewPage() {
 
   useEffect(() => {
     if (opcr) {
-      setTargets(opcr);
+      setStatus(opcr.status);
+      setTargets(opcr.data);
     }
   }, [opcr]);
 
   return (
-    <Card className="flex flex-col gap-2 p-4">
+    <div className="flex flex-col gap-2">
       <FormOpcr />
-      <ButtonControl />
-    </Card>
+
+      <div className="justify flex items-center justify-between">
+        <p className="font-bold text-zinc-800">
+          Status: <span className="capitalize"> {status}</span>
+        </p>
+        <ButtonControl />
+      </div>
+    </div>
   );
 }
 

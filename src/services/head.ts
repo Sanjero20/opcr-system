@@ -1,11 +1,12 @@
+import { OPCR_Response } from '@/types';
 import { api } from '.';
 import { Target } from '@/types/opcr.types';
 
-export async function getOPCR(): Promise<Target[]> {
+export async function getOPCR(): Promise<OPCR_Response> {
   try {
     const response = await api.get('/head/opcr');
     const opcr = await response.data;
-    return opcr.data || null;
+    return opcr;
   } catch (error: any) {
     throw new Error(error);
   }

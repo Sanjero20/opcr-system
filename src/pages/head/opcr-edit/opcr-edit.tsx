@@ -12,8 +12,15 @@ import { useNavigate } from 'react-router-dom';
 import { getOPCR, saveOPCR } from '@/services/head';
 
 function OpcrEditPage() {
-  const { targets, setTargets, addTarget, deleteTarget, handleTarget } =
-    useOpcr();
+  const {
+    status,
+    setStatus,
+    targets,
+    setTargets,
+    addTarget,
+    deleteTarget,
+    handleTarget,
+  } = useOpcr();
 
   const navigate = useNavigate();
 
@@ -25,7 +32,8 @@ function OpcrEditPage() {
 
   useEffect(() => {
     if (opcr) {
-      setTargets(opcr);
+      setStatus(opcr.status);
+      setTargets(opcr.data);
     }
   }, [opcr]);
 
@@ -42,6 +50,7 @@ function OpcrEditPage() {
           <Button
             className="absolute right-4 cursor-pointer rounded-sm bg-transparent px-2 font-bold hover:bg-muted/30"
             onClick={addTarget}
+            disabled={status === 'calibrating' || status === 'calibrated'}
           >
             <Plus />
           </Button>
@@ -55,6 +64,7 @@ function OpcrEditPage() {
                   placeholder=""
                   value={target.name}
                   onChange={(e) => handleTarget(e, target._id.$oid)}
+                  disabled={status === 'calibrating' || status === 'calibrated'}
                 />
 
                 <div className="flex gap-2">
@@ -62,6 +72,9 @@ function OpcrEditPage() {
                     className="w-24"
                     variant={'edit'}
                     onClick={() => navigate(`./${target._id.$oid}`)}
+                    disabled={
+                      status === 'calibrating' || status === 'calibrated'
+                    }
                   >
                     Edit
                   </Button>
@@ -70,6 +83,9 @@ function OpcrEditPage() {
                     className="w-24"
                     variant={'destructive'}
                     onClick={() => deleteTarget(target._id.$oid)}
+                    disabled={
+                      status === 'calibrating' || status === 'calibrated'
+                    }
                   >
                     Delete
                   </Button>
@@ -83,6 +99,7 @@ function OpcrEditPage() {
         <Button
           className="w-24"
           variant={'outline'}
+          disabled={status === 'calibrating' || status === 'calibrated'}
           onClick={() => navigate('/opcr')}
         >
           Cancel
@@ -91,8 +108,10 @@ function OpcrEditPage() {
         <Button
           className="w-24"
           variant={'add'}
+          disabled={status === 'calibrating' || status === 'calibrated'}
           onClick={() => {
             saveOPCR(targets);
+            setStatus('calibrating');
             navigate('/opcr');
           }}
         >
