@@ -28,12 +28,7 @@ function OpcrPreviewPage() {
     <div className="flex flex-col gap-2">
       <FormOpcr />
 
-      <div className="justify flex items-center justify-between">
-        <p className="font-bold text-zinc-800">
-          Status: <span className="capitalize"> {status}</span>
-        </p>
-        <ButtonControl />
-      </div>
+      <ButtonControl />
     </div>
   );
 }

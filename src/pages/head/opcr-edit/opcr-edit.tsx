@@ -10,6 +10,7 @@ import OpcrEditHeader from './opcr-edit-header';
 
 import { useNavigate } from 'react-router-dom';
 import { getOPCR, saveOPCR } from '@/services/head';
+import OPCRStatus from '@/components/form-opcr/opcr-status';
 
 function OpcrEditPage() {
   const {
@@ -95,29 +96,33 @@ function OpcrEditPage() {
         </div>
       </section>
 
-      <section className="flex justify-end gap-2">
-        <Button
-          className="w-24"
-          variant={'outline'}
-          disabled={status === 'calibrating' || status === 'calibrated'}
-          onClick={() => navigate('/opcr')}
-        >
-          Cancel
-        </Button>
+      <div className="flex items-center justify-between">
+        <OPCRStatus />
 
-        <Button
-          className="w-24"
-          variant={'add'}
-          disabled={status === 'calibrating' || status === 'calibrated'}
-          onClick={() => {
-            saveOPCR(targets);
-            setStatus('calibrating');
-            navigate('/opcr');
-          }}
-        >
-          Save
-        </Button>
-      </section>
+        <section>
+          <Button
+            className="w-24"
+            variant={'outline'}
+            disabled={status === 'calibrating' || status === 'calibrated'}
+            onClick={() => navigate('/opcr')}
+          >
+            Cancel
+          </Button>
+
+          <Button
+            className="w-24"
+            variant={'add'}
+            disabled={status === 'calibrating' || status === 'calibrated'}
+            onClick={() => {
+              saveOPCR(targets);
+              setStatus('calibrating');
+              navigate('/opcr');
+            }}
+          >
+            Save
+          </Button>
+        </section>
+      </div>
     </div>
   );
 }

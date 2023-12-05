@@ -31,3 +31,13 @@ export async function getOPCRbyId(id: string) {
     throw new Error(error);
   }
 }
+
+export async function getRemarksTemplate(opcrId: string) {
+  try {
+    const response = await api.get('/pmt/bulk/template/remark/' + opcrId);
+    const template = await response.data;
+    return template;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+}

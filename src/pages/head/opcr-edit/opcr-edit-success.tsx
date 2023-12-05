@@ -7,6 +7,7 @@ import InputFields from './opcr-fields';
 import useSelectedTarget from '@/hooks/use-selected-target';
 import { useOpcr } from '@/stores/opcr-store';
 import { updateMFODetails } from '@/services/head';
+import OPCRStatus from '@/components/form-opcr/opcr-status';
 
 function OpcrEditSuccessIndicator() {
   const params = useParams();
@@ -68,26 +69,30 @@ function OpcrEditSuccessIndicator() {
       </section>
 
       {/* Button Navigation */}
-      <section className="flex justify-end gap-2">
-        <Button
-          className="w-24"
-          variant={'outline'}
-          onClick={() => navigate('/opcr/edit')}
-        >
-          Cancel
-        </Button>
+      <section className="flex items-center justify-between">
+        <OPCRStatus />
 
-        <Button
-          className="w-24"
-          variant={'edit'}
-          onClick={() => {
-            updateMFODetails(target);
-            updateTargetDetails(target);
-            navigate('/opcr/edit');
-          }}
-        >
-          Update
-        </Button>
+        <div className="flex gap-2">
+          <Button
+            className="w-24"
+            variant={'outline'}
+            onClick={() => navigate('/opcr/edit')}
+          >
+            Cancel
+          </Button>
+
+          <Button
+            className="w-24"
+            variant={'edit'}
+            onClick={() => {
+              updateMFODetails(target);
+              updateTargetDetails(target);
+              navigate('/opcr/edit');
+            }}
+          >
+            Update
+          </Button>
+        </div>
       </section>
     </div>
   );
