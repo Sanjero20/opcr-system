@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 
-import { Card } from '@/components/ui/card';
 import FormOpcr from '@/components/form-opcr/form-opcr';
 
 import ButtonControl from './button-control';
@@ -12,7 +11,7 @@ import { useQuery } from '@tanstack/react-query';
 function OpcrPreviewPage() {
   const { status, setStatus, setTargets } = useOpcr();
 
-  const { data: opcr, error } = useQuery({
+  const { data: opcr } = useQuery({
     queryKey: ['opcr-data'],
     queryFn: getOPCR,
     initialData: null,
@@ -20,8 +19,8 @@ function OpcrPreviewPage() {
 
   useEffect(() => {
     if (opcr) {
-      setStatus(opcr.status);
-      setTargets(opcr.data);
+      setStatus(opcr.status || 'in progress');
+      setTargets(opcr.data || []);
     }
   }, [opcr]);
 

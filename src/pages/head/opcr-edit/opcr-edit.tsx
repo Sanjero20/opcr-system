@@ -24,7 +24,7 @@ function OpcrEditPage() {
 
   const navigate = useNavigate();
 
-  const { data: opcr, error } = useQuery({
+  const { data: opcr } = useQuery({
     queryKey: ['opcr-data'],
     queryFn: getOPCR,
     initialData: null,
@@ -32,8 +32,8 @@ function OpcrEditPage() {
 
   useEffect(() => {
     if (opcr) {
-      setStatus(opcr.status);
-      setTargets(opcr.data);
+      setStatus(opcr.status || 'in progress');
+      setTargets(opcr.data || []);
     }
   }, [opcr]);
 
