@@ -12,22 +12,21 @@ export async function getOPCR(): Promise<OPCR_Response> {
   }
 }
 
-export async function updateMFODetails(target: Target) {
+export async function addMFO(target: Omit<Target, '_id'>) {
   try {
     const response = await api.post('/head/add/mfo', target);
-    console.log(response);
     return await response.data;
   } catch (error: any) {
     throw new Error(error.message);
   }
 }
 
-export async function saveOPCR(opcrData: Target[]) {
+export async function updateMFODetails(target: Target) {
   try {
-    const response = await api.post('/head/add/bulk/mfo', opcrData);
+    const response = await api.post('/head/edit/mfo/', target);
     return await response.data;
   } catch (error: any) {
-    throw new Error(error);
+    throw new Error(error.message);
   }
 }
 

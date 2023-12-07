@@ -8,7 +8,7 @@ import OpcrEditHeader from '../components/opcr-info-header';
 import TableHeader from './table-header';
 import TableBody from './table-body';
 
-import { getOPCR, saveOPCR } from '@/services/head';
+import { getOPCR } from '@/services/head';
 import { useOpcr } from '@/stores/opcr-store';
 
 function OpcrEditPage() {
@@ -29,6 +29,11 @@ function OpcrEditPage() {
     }
   }, [opcr]);
 
+  // Button handlers
+  const cancelChanges = () => {};
+
+  const saveChanges = () => {};
+
   return (
     <div className="flex h-full flex-col gap-2">
       <h1 className="title">OPCR FORM EDIT</h1>
@@ -42,33 +47,19 @@ function OpcrEditPage() {
       </section>
 
       {/* Footer */}
-      <div className="flex items-center justify-between">
+      <section className="flex items-center justify-between">
         <OPCRStatus />
 
-        <section>
-          <Button
-            className="w-24"
-            variant={'outline'}
-            disabled={status === 'calibrating' || status === 'calibrated'}
-            onClick={() => navigate('/opcr')}
-          >
-            Cancel
-          </Button>
-
+        <div>
           <Button
             className="w-24"
             variant={'add'}
-            disabled={status === 'calibrating' || status === 'calibrated'}
-            onClick={() => {
-              saveOPCR(targets);
-              setStatus('calibrating');
-              navigate('/opcr');
-            }}
+            onClick={() => navigate('/opcr')}
           >
-            Save
+            View Form
           </Button>
-        </section>
-      </div>
+        </div>
+      </section>
     </div>
   );
 }

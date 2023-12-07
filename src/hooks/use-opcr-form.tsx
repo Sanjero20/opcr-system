@@ -34,7 +34,8 @@ function useOpcrForm({ name, indicators }: useOpcrFormProps) {
   };
 
   const deleteTargetIndicator = (index: number) => {
-    const updatedTargets = targetIndicators.splice(index, 1);
+    const updatedTargets = [...targetIndicators];
+    updatedTargets.splice(index, 1);
     setTargetIndicators(updatedTargets);
   };
 

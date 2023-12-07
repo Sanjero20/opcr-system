@@ -1,6 +1,8 @@
 import useOpcrForm from '@/hooks/use-opcr-form';
 import OpcrEditForm from '../components/opcr-form/opr-form';
 import { Button } from '@/components/ui/button';
+import Buttons from './buttons';
+import { addMFO } from '@/services/head';
 
 function OpcrAddPage() {
   const {
@@ -12,6 +14,15 @@ function OpcrAddPage() {
     handleTargetIndicator,
     handleTargetIndicatorRating,
   } = useOpcrForm({ name: '' });
+
+  const handleSave = async () => {
+    const response = await addMFO({
+      name: targetName,
+      success: targetIndicators,
+    });
+
+    console.log(response);
+  };
 
   return (
     <div className="flex h-full flex-col gap-2">
@@ -27,13 +38,7 @@ function OpcrAddPage() {
         handleIndicatorRatings={handleTargetIndicatorRating}
       />
 
-      {/* FOOTER - contains button controls and status */}
-      <Button
-        onClick={() => console.log(targetName, targetIndicators)}
-        className="w-fit"
-      >
-        CLICK
-      </Button>
+      <Buttons handleSave={handleSave} />
     </div>
   );
 }
