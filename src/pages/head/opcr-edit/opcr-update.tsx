@@ -7,6 +7,8 @@ import OpcrEditForm from '../components/opcr-form/opr-form';
 
 import { useOpcr } from '@/stores/opcr-store';
 import useOpcrForm from '@/hooks/use-opcr-form';
+import { updateMFODetails } from '@/services/head';
+import { Target } from '@/types/opcr.types';
 
 function OpcrEditExistingTarget() {
   const [error, setError] = useState('');
@@ -43,6 +45,18 @@ function OpcrEditExistingTarget() {
   if (!params) return <>This MFO does not exist</>;
   if (error) return <>{error}</>;
 
+  const handleUpdateMFO = async () => {
+    if (!params.id) return;
+
+    const formattedData: Target = {
+      _id: { $oid: params.id },
+      name: targetName,
+      success: targetIndicators,
+    };
+
+    const response = await updateMFODetails(formattedData);
+  };
+
   return (
     <div className="flex h-full flex-col gap-2">
       <h1 className="title">OPCR FORM EDIT</h1>
@@ -74,6 +88,7 @@ function OpcrEditExistingTarget() {
             className="w-24"
             variant={'edit'}
             onClick={() => {
+              handleUpdateMFO();
               navigate('/opcr/edit');
             }}
           >

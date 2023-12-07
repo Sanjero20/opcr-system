@@ -22,8 +22,9 @@ export async function addMFO(target: Omit<Target, '_id'>) {
 }
 
 export async function updateMFODetails(target: Target) {
+  const id = target._id.$oid;
   try {
-    const response = await api.post('/head/edit/mfo/', target);
+    const response = await api.post(`/head/edit/mfo/${id}`, target);
     return await response.data;
   } catch (error: any) {
     throw new Error(error.message);
