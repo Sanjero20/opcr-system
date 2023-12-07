@@ -40,7 +40,8 @@ function ButtonLogout() {
           </DialogClose>
 
           <Button
-            className={`text-md w-24 bg-red-500 hover:bg-red-700`}
+            variant={'destructive'}
+            className={'w-24'}
             onClick={handleLogout}
           >
             Logout

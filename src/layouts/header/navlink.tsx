@@ -19,8 +19,10 @@ function NavLink({ href, children }: NavLinkProps) {
   );
 
   return (
-    <Link to={href}>
-      <Button className={`${styles} `}>{children}</Button>
+    <Link to={href} tabIndex={-1}>
+      <Button className={`${styles}`} aria-hidden>
+        {children}
+      </Button>
     </Link>
   );
 }

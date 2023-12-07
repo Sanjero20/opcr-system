@@ -1,5 +1,6 @@
+import NavLink from './navlink';
 import { useMemo } from 'react';
-
+import { getCookie } from '@/lib/cookie';
 import {
   ADMIN_ROUTES,
   IPCR_ROUTES,
@@ -7,8 +8,7 @@ import {
   PMT_ROUTES,
   NavRoute,
 } from '@/constants/navbar-routes';
-import NavLink from './navlink';
-import { getCookie } from '@/lib/cookie';
+
 function Links() {
   const permission = getCookie('permission');
 
