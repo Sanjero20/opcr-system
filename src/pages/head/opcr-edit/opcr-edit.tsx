@@ -1,27 +1,18 @@
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { useOpcr } from '@/stores/opcr-store';
-import { Plus } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-
-import OpcrEditHeader from './opcr-edit-header';
-
-import { useNavigate } from 'react-router-dom';
-import { getOPCR, saveOPCR } from '@/services/head';
 import OPCRStatus from '@/components/form-opcr/opcr-status';
+import OpcrEditHeader from '../components/opcr-info-header';
+import TableHeader from './table-header';
+import TableBody from './table-body';
+
+import { getOPCR, saveOPCR } from '@/services/head';
+import { useOpcr } from '@/stores/opcr-store';
 
 function OpcrEditPage() {
-  const {
-    status,
-    setStatus,
-    targets,
-    setTargets,
-    addTarget,
-    deleteTarget,
-    handleTarget,
-  } = useOpcr();
+  const { status, setStatus, targets, setTargets } = useOpcr();
 
   const navigate = useNavigate();
 
@@ -46,54 +37,8 @@ function OpcrEditPage() {
 
       {/* OPCR TARGETS DATA */}
       <section className="flex flex-1 flex-col ">
-        <div className="relative flex items-center justify-center rounded-t bg-tableHead py-4 text-center text-white">
-          Major Final Output / Projects / Programs List
-          <Button
-            className="absolute right-4 cursor-pointer rounded-sm bg-transparent px-2 font-bold hover:bg-muted/30"
-            onClick={addTarget}
-            disabled={status === 'calibrating' || status === 'calibrated'}
-          >
-            <Plus />
-          </Button>
-        </div>
-
-        <div className="bg-tableBody flex h-full flex-1 flex-col gap-2 p-4">
-          {targets &&
-            targets.map((target, index) => (
-              <div key={index} className="flex gap-4">
-                <Input
-                  placeholder=""
-                  value={target.name}
-                  onChange={(e) => handleTarget(e, target._id.$oid)}
-                  disabled={status === 'calibrating' || status === 'calibrated'}
-                />
-
-                <div className="flex gap-2">
-                  <Button
-                    className="w-24"
-                    variant={'edit'}
-                    onClick={() => navigate(`./${target._id.$oid}`)}
-                    disabled={
-                      status === 'calibrating' || status === 'calibrated'
-                    }
-                  >
-                    Edit
-                  </Button>
-
-                  <Button
-                    className="w-24"
-                    variant={'destructive'}
-                    onClick={() => deleteTarget(target._id.$oid)}
-                    disabled={
-                      status === 'calibrating' || status === 'calibrated'
-                    }
-                  >
-                    Delete
-                  </Button>
-                </div>
-              </div>
-            ))}
-        </div>
+        <TableHeader />
+        <TableBody />
       </section>
 
       <div className="flex items-center justify-between">
