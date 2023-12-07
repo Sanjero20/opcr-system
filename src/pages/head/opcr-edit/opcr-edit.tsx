@@ -41,6 +41,7 @@ function OpcrEditPage() {
         <TableBody />
       </section>
 
+      {/* Footer */}
       <div className="flex items-center justify-between">
         <OPCRStatus />
 

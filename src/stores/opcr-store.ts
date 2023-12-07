@@ -12,11 +12,8 @@ interface OpcrActions {
   setStatus: (status: OPCR_Status) => void;
   setTargets: (targets: Target[]) => void;
 
-  addTarget: () => void;
+  addTarget: (target: Target) => void;
   deleteTarget: (targetId: string) => void;
-  handleTarget: (e: ChangeEvent<HTMLInputElement>, targetId: string) => void;
-
-  updateTargetDetails: (data: Target) => void;
 
   resetOPCR: () => void;
 }
@@ -51,9 +48,9 @@ export const useOpcr = create<OpcrStates & OpcrActions>((set, get) => ({
     set({ targets });
   },
 
-  addTarget: () => {
+  addTarget: (target) => {
     const latestTargets = get().targets;
-    set({ targets: [...latestTargets, initialTarget()] });
+    set({ targets: [...latestTargets, target] });
   },
 
   deleteTarget: (targetId) => {
@@ -63,27 +60,6 @@ export const useOpcr = create<OpcrStates & OpcrActions>((set, get) => ({
     );
 
     set({ targets: latestTargets });
-  },
-
-  handleTarget: (e, targetId) => {
-    const value = e.target.value;
-
-    const latestTargets = get().targets;
-    const updatedTargets = latestTargets.map((target) => {
-      return target._id.$oid === targetId ? { ...target, name: value } : target;
-    });
-
-    set({ targets: updatedTargets });
-  },
-
-  updateTargetDetails: (targetData) => {
-    const targetId = targetData._id.$oid;
-    const targets = get().targets;
-
-    const updatedTargets = targets.map((target) =>
-      target._id.$oid === targetId ? targetData : target,
-    );
-    set({ targets: updatedTargets });
   },
 
   resetOPCR: () => {

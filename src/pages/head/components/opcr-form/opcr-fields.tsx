@@ -29,6 +29,7 @@ function InputFields({
             className="col-span-4 font-normal"
             value={sucessIndicators[index].indicator}
             onChange={(e) => handleIndicator(e, index)}
+            autoComplete="off"
           />
 
           <Input
@@ -36,6 +37,7 @@ function InputFields({
             className="col-span-2 font-normal"
             value={success.budget}
             onChange={(e) => handleIndicator(e, index)}
+            autoComplete="off"
           />
 
           <Input
@@ -43,6 +45,7 @@ function InputFields({
             className="col-span-3 font-normal"
             value={success.division}
             onChange={(e) => handleIndicator(e, index)}
+            autoComplete="off"
           />
 
           <ToggleRating
