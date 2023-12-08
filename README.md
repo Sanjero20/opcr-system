@@ -1,30 +1,34 @@
-# React + TypeScript + Vite
+# Office Performance Commitment Review
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The Office Performance Commitment Review (OPCR) system is designed to streamline the management and review of office performance commitments. It provides a structured approach to setting, tracking, and evaluating commitments made by teams or individuals within the office.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+#### Admin
 
-## Expanding the ESLint configuration
+- [x] Create campus and offices
+- [ ] Update campus details
+- [ ] Delete campus
+- [x] Create account (PMT, Head, Individual)
+- [ ] Update account Details
+- [x] Delete account
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+#### Head
 
-- Configure the top-level `parserOptions` property like this:
+- [x] Create new MFO
+- [x] Edit and Update MFO details
+- [x] Submit OPCR
+- [ ] Assign MFO to individual
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+#### PMT
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- [ ] View offices
+- [ ] View office OPCR
+- [ ] Add remarks / comments
+- [ ] Reject OPCR
+- [ ] Accept OPCR
+
+#### Individual
+
+- [ ] View assigned MFO
+- [ ] Submit assigned MFO
