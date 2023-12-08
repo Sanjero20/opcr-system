@@ -1,5 +1,6 @@
 import { queryClient } from '@/App';
 import { Button } from '@/components/ui/button';
+import { useOpcr } from '@/stores/opcr-store';
 import { useNavigate } from 'react-router-dom';
 
 interface ButtonProps {
@@ -8,6 +9,7 @@ interface ButtonProps {
 
 function Buttons({ handleSave }: ButtonProps) {
   const navigate = useNavigate();
+  const { status } = useOpcr();
 
   const handleSaveMFO = () => {
     handleSave();
@@ -25,7 +27,12 @@ function Buttons({ handleSave }: ButtonProps) {
         Cancel
       </Button>
 
-      <Button className="w-24" onClick={handleSaveMFO} variant={'add'}>
+      <Button
+        className="w-24"
+        onClick={handleSaveMFO}
+        variant={'add'}
+        disabled={status === 'calibrating'}
+      >
         Save
       </Button>
     </div>
