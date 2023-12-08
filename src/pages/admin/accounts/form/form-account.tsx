@@ -49,11 +49,12 @@ interface AccountFormProps {
 function FormAccount({ closeModal }: AccountFormProps) {
   const [errorMsg, setErrorMsg] = useState('');
   const [accountType, setAccountType] = useState(initialAccountData.permission);
-  const { toast } = useToast();
+
   // Optional variables for pmt & head
   const [selectedCampus, setSelectedCampus] = useState('');
   const [selectedOffice, setSelectedOffice] = useState('');
 
+  const { toast } = useToast();
   const form = useForm<AccountFormType>({
     resolver: zodResolver(accountFormSchema),
     defaultValues: initialAccountData,
@@ -73,12 +74,15 @@ function FormAccount({ closeModal }: AccountFormProps) {
           selectedOffice,
         );
       }
-      toast({
-        title: 'Account Successfully Added!',
-      });
+
       queryClient.invalidateQueries({ queryKey: ['accounts'] });
       closeModal();
       form.reset();
+
+      // Display a toast message when successful
+      toast({
+        title: 'Account Successfully Added!',
+      });
     },
     onError: (error: any) => {
       setErrorMsg(error.message);

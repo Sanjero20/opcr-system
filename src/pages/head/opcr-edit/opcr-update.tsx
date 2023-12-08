@@ -9,6 +9,7 @@ import { useOpcr } from '@/stores/opcr-store';
 import useOpcrForm from '@/hooks/use-opcr-form';
 import { updateMFODetails } from '@/services/head';
 import { Target } from '@/types/opcr.types';
+import { queryClient } from '@/App';
 
 function OpcrEditExistingTarget() {
   const [error, setError] = useState('');
@@ -55,6 +56,7 @@ function OpcrEditExistingTarget() {
     };
 
     const response = await updateMFODetails(formattedData);
+    queryClient.invalidateQueries({ queryKey: ['opcr-data'] });
   };
 
   return (

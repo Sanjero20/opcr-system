@@ -1,10 +1,16 @@
-import useOpcrForm from '@/hooks/use-opcr-form';
+import { queryClient } from '@/App';
+import { useNavigate } from 'react-router-dom';
+
 import OpcrEditForm from '../components/opcr-form/opr-form';
-import { Button } from '@/components/ui/button';
 import Buttons from './buttons';
+
 import { addMFO } from '@/services/head';
+import useOpcrForm from '@/hooks/use-opcr-form';
+import { useOpcr } from '@/stores/opcr-store';
 
 function OpcrAddPage() {
+  const navigate = useNavigate();
+
   const {
     targetName,
     handleTargetName,
@@ -16,12 +22,13 @@ function OpcrAddPage() {
   } = useOpcrForm({ name: '' });
 
   const handleSave = async () => {
-    const response = await addMFO({
+    await addMFO({
       name: targetName,
       success: targetIndicators,
     });
 
-    console.log(response);
+    queryClient.invalidateQueries({ queryKey: ['opcr-data'] });
+    navigate('/opcr/edit');
   };
 
   return (

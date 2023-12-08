@@ -29,11 +29,6 @@ function OpcrEditPage() {
     }
   }, [opcr]);
 
-  // Button handlers
-  const cancelChanges = () => {};
-
-  const saveChanges = () => {};
-
   return (
     <div className="flex h-full flex-col gap-2">
       <h1 className="title">OPCR FORM EDIT</h1>

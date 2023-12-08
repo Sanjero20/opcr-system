@@ -1,9 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import { Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useOpcr } from '@/stores/opcr-store';
 
 function TableHeader() {
   const navigate = useNavigate();
+
+  const { status } = useOpcr();
 
   return (
     <header className="relative flex items-center justify-center rounded-t bg-tableHead py-4 text-center text-white">

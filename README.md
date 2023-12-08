@@ -8,9 +8,9 @@ The Office Performance Commitment Review (OPCR) system is designed to streamline
 
 - [x] Create campus and offices
 - [ ] Update campus details
-- [ ] Delete campus
+- [x] Delete campus
 - [x] Create account (PMT, Head, Individual)
-- [ ] Update account Details
+- [ ] Update account details
 - [x] Delete account
 
 #### Head
