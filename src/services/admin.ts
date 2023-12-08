@@ -93,11 +93,11 @@ export async function createCampus(name: string, offices: any[]) {
 }
 
 // Assign
-export async function assignPMTToCampus(pmtid: string, campus: string) {
+export async function assignPMTToCampus(pmtid: string, campusid: string) {
   try {
     const response = await api.post(adminURL + '/assign/pmt/campus', {
       pmtid,
-      campus,
+      campusid,
     });
     return await response.data;
   } catch (error: any) {
