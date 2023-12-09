@@ -91,7 +91,7 @@ function OpcrEditExistingTarget() {
             variant={'edit'}
             onClick={() => {
               handleUpdateMFO();
-              navigate('/opcr/edit');
+              navigate('/opcr');
             }}
           >
             Update

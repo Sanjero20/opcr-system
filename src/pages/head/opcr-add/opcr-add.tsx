@@ -6,7 +6,6 @@ import Buttons from './buttons';
 
 import { addMFO } from '@/services/head';
 import useOpcrForm from '@/hooks/use-opcr-form';
-import { useOpcr } from '@/stores/opcr-store';
 
 function OpcrAddPage() {
   const navigate = useNavigate();
@@ -28,7 +27,7 @@ function OpcrAddPage() {
     });
 
     queryClient.invalidateQueries({ queryKey: ['opcr-data'] });
-    navigate('/opcr/edit');
+    navigate('/opcr');
   };
 
   return (
