@@ -10,6 +10,7 @@ import useOpcrForm from '@/hooks/use-opcr-form';
 import { updateMFODetails } from '@/services/head';
 import { Target } from '@/types/opcr.types';
 import { queryClient } from '@/App';
+import Nonexistent from './non-existent';
 
 function OpcrEditExistingTarget() {
   const [error, setError] = useState('');
@@ -43,7 +44,7 @@ function OpcrEditExistingTarget() {
     setTargetIndicators(target.success);
   }, []);
 
-  if (!params) return <>This MFO does not exist</>;
+  if (!params) return <Nonexistent />;
   if (error) return <>{error}</>;
 
   const handleUpdateMFO = async () => {
