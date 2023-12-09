@@ -1,7 +1,7 @@
 import { queryClient } from '@/App';
 import { useNavigate } from 'react-router-dom';
 
-import OpcrEditForm from '../components/opcr-form/opr-form';
+import OpcrEditForm from '../components/opcr-form/opcr-form';
 import Buttons from './buttons';
 
 import { addMFO } from '@/services/head';

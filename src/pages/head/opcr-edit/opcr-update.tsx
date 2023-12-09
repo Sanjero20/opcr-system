@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { Button } from '@/components/ui/button';
 import OPCRStatus from '@/components/form-opcr/opcr-status';
-import OpcrEditForm from '../components/opcr-form/opr-form';
+import OpcrEditForm from '../components/opcr-form/opcr-form';
 
 import { useOpcr } from '@/stores/opcr-store';
 import useOpcrForm from '@/hooks/use-opcr-form';

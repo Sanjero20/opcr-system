@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 
-import ToggleRating from '@/pages/head/opcr-edit/toggle-rating';
+import ToggleRating from './toggle-rating';
 
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';

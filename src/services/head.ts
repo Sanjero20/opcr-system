@@ -1,5 +1,5 @@
-import { OPCR_Response } from '@/types';
 import { api } from '.';
+import { OPCR_Response } from '@/types';
 import { Target } from '@/types/opcr.types';
 
 export async function getOPCR(): Promise<OPCR_Response> {
@@ -15,6 +15,15 @@ export async function getOPCR(): Promise<OPCR_Response> {
 export async function addMFO(target: Omit<Target, '_id'>) {
   try {
     const response = await api.post('/head/add/mfo', target);
+    return await response.data;
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+}
+
+export async function deleteMFO(id: string) {
+  try {
+    const response = await api.delete('/head/delete/mfo/' + id);
     return await response.data;
   } catch (error: any) {
     throw new Error(error.message);

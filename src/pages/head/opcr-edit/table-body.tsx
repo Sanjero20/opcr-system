@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { useOpcr } from '@/stores/opcr-store';
+import ButtonDeleteMFO from './button-delete';
 
 function TableBody() {
   const { status, targets } = useOpcr();
@@ -26,14 +27,7 @@ function TableBody() {
                 Edit
               </Button>
 
-              <Button
-                className="w-24"
-                variant={'destructive'}
-                // onClick={() => deleteTarget(target._id.$oid)}
-                disabled={status === 'calibrating' || status === 'calibrated'}
-              >
-                Delete
-              </Button>
+              <ButtonDeleteMFO id={target._id.$oid} />
             </div>
           </div>
         ))}
